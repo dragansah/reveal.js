@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="css/theme/simple.css" id="theme"/>
 
         <!-- For syntax highlighting -->
-        <link rel="stylesheet" href="lib/css/zenburn.css"/>
+        <link rel="stylesheet" href="lib/css/xcode.css"/>
 <!--        <link rel="stylesheet" href=" css/print/pdf.css"/>-->
         <link rel="stylesheet" href="fonts/stobi.css"/>
         <style type="text/css">
@@ -47,12 +47,13 @@
             <!-- Any section element inside of this container is displayed as a slide -->
             <div class="slides">
                 <div class="footer"></div>
+
                 <section>
                     <h2 style="text-align:center;border:none">
                         Python</h2>
                     <h4 style="text-align:center;border:none">
                         Командни процедури во UNIX</h4>
-<img src="img/front.jpg" style="width: 300px; height: 290px; border:none"/>
+                    <img src="img/front.jpg" style="width: 300px; height: 290px; border:none"/>
                 </section>
 
                 <section>
@@ -90,49 +91,52 @@
 Python 2.7.3 (default, Sep 26 2012, 21:51:14) 
 [GCC 4.7.2] on linux2
 Type "help", "copyright", "credits" or "license" for more information.
->>>
-</code></pre>
-</li>
-<li>
-    Внесениот израз се евалуира веднаш
-    <pre><code contenteditable class="python">>>>3*(7+2)
+>>></code></pre>
+
+                        </li>
+                        <li>
+                            Внесениот израз се евалуира веднаш
+                            <pre><code contenteditable class="python">>>>3*(7+2)
 27</code></pre>
-</li>
+                        </li>
 
-<li>За излегување од REPL околината внесете: CTRL-D</li>
-</ul>
-</section>
+                        <li>За излегување од REPL околината внесете: CTRL-D</li>
+                    </ul>
+                </section>
 
 
-<section>
-	   <h3>Python скрипти во UNIX</h3>
-    <ol>
-        <li>Извршување на датотека преку внесување на python и името на датотеката:
-            <pre><code class="bash">~$ python filename.py</code></pre></li>
-        <li>Извршување како UNIX извршна датотека:
-            <ul><li>.py датеката треба да ја има соодветната пермисија за извршување 'x'</li>
-                <li>Датотеката треба да почнува со<pre><code>#!/usr/bin/env python</code></pre></li>
-                <li>Извршување како извршна датотека:
-                    <pre><code>~$ ./filename.py</code></pre>
-                </li>
+                <section>
+	               <h3>Python скрипти во UNIX</h3>
+                   <ol>
+                        <li>Извршување на датотека преку внесување на python и името на датотеката:
+                            <pre><code class="bash">~$ python filename.py</code></pre>
+                        </li>
+                        <li>Извршување како UNIX извршна датотека:
+                            <ul>
+                                <li>.py датеката треба да ја има соодветната пермисија за извршување 'x'</li>
+                                <li>Датотеката треба да почнува со<pre><code>#!/usr/bin/env python</code></pre></li>
+                                <li>Извршување како извршна датотека:
+                                    <pre><code>~$ ./filename.py</code></pre>
+                                </li>
 
-    </ol>
-    </ul>
-</section>
+                            </ull>
+                        </li>
+                    </ol>
+                </section>
 
-<section>
-	   <h3>Hello world</h3>
- <pre><code class="python">>>> print 'Hello world!'
+                <section>
+                    <h3>Hello world</h3>
+                    <pre><code class="python">>>> print 'Hello world!'
 Hello world!</code></pre>
 
- <pre><code class="python">>>> a = 'Hello world!'
+                    <pre><code class="python">>>> a = 'Hello world!'
 >>> print a
 Hello world!</code></pre>
-</section>
+                </section>
 
-<section>
-<h3>Едноставен пример</h3>
-<pre><code class="python">x = 34 - 23 			# Ова е коментар
+                <section>
+                    <h3>Едноставен пример</h3>
+                    <pre><code class="python">x = 34 - 23 			# Ова е коментар
 y, z = "Hello", 3.45		# Повеќекратко доделување на вредност
 if z == 3.45 or y == “Hello”: 	# if statement
  x = x + 1
@@ -140,88 +144,97 @@ if z == 3.45 or y == “Hello”: 	# if statement
 print x				# Печатење на std out
 print y</code></pre>
 
-<ul style="line-height:1.1em;">
-<li>За доделување се користи = додека за споредба ==
-<li>За броеви <strong>+ - * / %</strong> како во C или Java</li>
-<ul><li>За конкатенација на string-ови <strong>+</strong></li>
-<li>За форматирање на string-ови <strong>%</strong> (како printf во C)</li></ul>
-<li>Логичките оператори со зборовите <strong>and, or, not</strong></li>
-<li>Основната наредба за печатење е <strong>print</strong></li>
-<li>Не е потребна декларација на променливи</li>
-<ul><li>Типот на променливите не се декларира експлицитно</li>
-<li>Python сам го <strong>погодува</strong> типот на променливите</li></ul>
-</ul>
+                    <ul style="line-height:1.1em;">
+                        <li>За доделување се користи = додека за споредба ==
+                        <li>За броеви <strong>+ - * / %</strong> како во C или Java</li>
+                        <ul>
+                            <li>За конкатенација на string-ови <strong>+</strong></li>
+                            <li>За форматирање на string-ови <strong>%</strong> (како printf во C)</li>
+                        </ul>
+                        <li>Логичките оператори со зборовите <strong>and, or, not</strong></li>
+                        <li>Основната наредба за печатење е <strong>print</strong></li>
+                        <li>Не е потребна декларација на променливи</li>
+                        <ul>
+                            <li>Типот на променливите не се декларира експлицитно</li>
+                            <li>Python сам го <strong>погодува</strong> типот на променливите</li>
+                        </ul>
+                    </ul>
 
-</section>
+                </section>
 
-<section>
-	   <h3>Основни податочни типови</h3>
-    <ul>
-        <li>
-            <strong>Integer</strong> (default-ен тип за броеви)</li>
-        <li><pre><code class="python">z = 5 / 2 # Резултатот е 2, делење на integer-и</code></pre></li>
-        <li><strong>Float</strong>
-            <pre><code class="python">x = 3.456</code></pre>
-</li>
-        <li><strong>String</strong></li>
-        <ul>
-            <li>Се дефинираат со користење на "" или ''
-            <pre><code class="python">"abc" == 'abc'</code></pre></li>
-            <li>Се користат тројни наводници за дефинирање на string во повеќе линии или на string кој содржи &quot или '</li>
-            <li><pre><code class="python">"""a'
+                <section>
+	               <h3>Основни податочни типови</h3>
+                    <ul>
+                        <li>
+                            <strong>Integer</strong> (default-ен тип за броеви)
+                        </li>
+                        <li><pre><code class="python">z = 5 / 2 # Резултатот е 2, делење на integer-и</code></pre></li>
+                        <li>
+                            <strong>Float</strong>
+                            <pre><code class="python">x = 3.456</code></pre>
+                        </li>
+                        <li><strong>String</strong></li>
+                        <ul>
+                            <li>Се дефинираат со користење на "" или ''
+                                <pre><code class="python">"abc" == 'abc'</code></pre>
+                            </li>
+                            <li>Се користат тројни наводници за дефинирање на string во повеќе линии или на string кој содржи &quot или '</li>
+                            <li><pre><code class="python">"""a'
 b&quotc"""</code></pre>
-                </li>
-        </ul>
-</section>
+                            </li>
+                        </ul>
+                    </ul>
+                </section>
 
-<section>
-	   <h3>Whitespace</h3>
-<ul><li>    
-Whitespace-ите има значење во Python, особено назабувањата и новите линии</li>
-    <li>Се користи нова линија за завршување на линија со код</li>
-    <li>Се користи <strong>\</strong> кога мора да се оди за започнување на нова наредба без нова линија</li>
-    <li>Наместо <strong>{ }</strong> за означување на блок со код се користи конзистентно назабување</li>
-    <li>Првата линија со помало назабување е надвор од тој блокот со код од претходната линија</li>
-    <li>Првата линија со поголемо назабуање од претходната започнува нов вгнезден блок</li>
-    <li>Често се користи <strong>:</strong> за започнување на нов блок (при декларирање на функциии класи)</li>
-</ul>
-</section>
+                <section>
+            	   <h3>Whitespace</h3>
+                    <ul>
+                        <li>Whitespace-ите има значење во Python, особено назабувањата и новите линии</li>
+                        <li>Се користи нова линија за завршување на линија со код</li>
+                        <li>Се користи <strong>\</strong> кога мора да се оди за започнување на нова наредба без нова линија</li>
+                        <li>Наместо <strong>{ }</strong> за означување на блок со код се користи конзистентно назабување</li>
+                        <li>Првата линија со помало назабување е надвор од тој блокот со код од претходната линија</li>
+                        <li>Првата линија со поголемо назабуање од претходната започнува нов вгнезден блок</li>
+                        <li>Често се користи <strong>:</strong> за започнување на нов блок (при декларирање на функциии класи)</li>
+                    </ul>
+                </section>
 
-<section>
-	   <h3>Коментари</h3>
-<ul><li>  
-    Коментарите започнуват со <strong>#</strong></li>
-    <li>String-от кој се наоќа на првата линија после декларација на функција или класа е документација за соодветната функција или класа</li>
-<li>Се користи од debug-ери, IDE алатки итн.</li>
-    <li>Пример:
-<pre><code class="python">def my_function(x, y):
+                <section>
+                    <h3>Коментари</h3>
+                    <ul>
+                        <li>Коментарите започнуват со <strong>#</strong></li>
+                        <li>String-от кој се наоќа на првата линија после декларација на функција или класа е документација за соодветната функција или класа</li>
+                        <li>Се користи од debug-ери, IDE алатки итн.</li>
+                        <li>Пример:
+                            <pre><code class="python">def my_function(x, y):
   """This is the docstring. This
   function does blah blah blah."""
   # The code would go here...
 </code></pre>
-</li>
-</li></ul>
-</section>
+                        </li>
+                    </ul>
+                </section>
 
-<section>
-	   <h3>Доделување</h3>
-<ul style="line-height: 1.1em"><li>  
-    Доделување на променлива во Python значи задавање на <strong>име</strong> на <strong>референца</strong> кон некој <strong>објект</strong>
-    <li>Доделувањето креира нови референци, не копира цели објекти
-    <li>Променливите во Python немаат типови, туку објектите имаат типови
-    <li>Python го одредува типот на референцата автоматски врз основа на објектот доделен на применливата
-    <li>Промелиците се декларираат имплицитно, првиот пат кога ќе се појават на левата страна на израз за доделување
-    <pre><code class="python">x = 3</code></pre>
-</li>
-    <li>Референците се уништуваат преку garbage collection откако не се веќе референцирани од некоја променлива
-</li></ul>
-</section>
+                <section>
+                    <h3>Доделување</h3>
+                    <ul style="line-height: 1.1em">
+                        <li>Доделување на променлива во Python значи задавање на <strong>име</strong> на <strong>референца</strong> кон некој <strong>објект</strong>
+                        <li>Доделувањето креира нови референци, не копира цели објекти
+                        <li>Променливите во Python немаат типови, туку објектите имаат типови
+                        <li>Python го одредува типот на референцата автоматски врз основа на објектот доделен на применливата
+                        <li>Промелиците се декларираат имплицитно, првиот пат кога ќе се појават на левата страна на израз за доделување
+                            <pre><code class="python">x = 3</code></pre>
+                        </li>
+                        <li>Референците се уништуваат преку garbage collection откако не се веќе референцирани од некоја променлива
+                        </li>
+                    </ul>
+                </section>
 
-<section>
-	   <h3>Пристапување до непостоечки променливи</h3>
-    <ul><li>
-            Ако се пристапи до применлива која се уште не е правилно креирана, се добива грешка
-<pre><code class="python">>>> y
+                <section>
+                    <h3>Пристапување до непостоечки променливи</h3>
+                    <ul>
+                        <li>Ако се пристапи до применлива која се уште не е правилно креирана, се добива грешка
+                            <pre><code class="python">>>> y
 Traceback (most recent call last):
  File "<pyshell#16>", line 1, in -toplevel-
   y
@@ -230,86 +243,90 @@ NameError: name 'y' is not defined
 >>> y
 3
 </code></pre>
-</li></ul>
-</section>
+                        </li>
+                    </ul>
+                </section>
 
-<section>
-	   <h3>Повеќекратно доделување</h3>
-<ul><li>Повеќекратно доделување на повеќе променливи во иста кодна линија
-<pre><code class="python">>>> x, y = 2, 3
+                <section>
+                    <h3>Повеќекратно доделување</h3>
+                    <ul>
+                        <li>Повеќекратно доделување на повеќе променливи во иста кодна линија
+                            <pre><code class="python">>>> x, y = 2, 3
 >>> x
 2
 >>> y
 3
 </code></pre>
-</li></ul>
-</section>
+                        </li>
+                    </ul>
+                </section>
 
-<section>
-	   <h3>Именување на променливи</h3>
-<ul>
-<li>Имињата на променливите се case sensitive и не може да почнуваат со број. Може да содржат букви, броеви и долни линии (underscore). Пример:
-<pre><code class="python">bob
+                <section>
+                    <h3>Именување на променливи</h3>
+                    <ul>
+                        <li>Имињата на променливите се case sensitive и не може да почнуваат со број. Може да содржат букви, броеви и долни линии (underscore). Пример:
+                            <pre><code class="python">bob
 Bob
 _bob
 _2_bob_
 bob_2
 BoB
 </code></pre>
-</li>
-<li>Резервирани зборови:
-<pre><code class="python">and, assert, break, class, continue, def, del, 
+                        </li>
+                        <li>Резервирани зборови:
+                            <pre><code class="python">and, assert, break, class, continue, def, del, 
 elif, else, except, exec, finally, for, from, 
 global, if, import, in, is, lambda, not, or, 
 pass, print, raise, return, try, while
-</code></pre></li>
-</ul>
-</section>
+</code></pre>
+                        </li>
+                    </ul>
+                </section>
 
-<section>
-    <h3>Секвенци</h3>
-    <ol><li>Tuple</li>
-        <ul>
-            <li>Едноставна, подредена секвенца од елементи</li>
-            <li>Immutable</li>
-            <li>Елементите може да бидат од разни типови вклучувајќи и други колекции</li>
-        </ul>
-        <li>String</li>
-        <ul>
-            <li>Immutable</li>
-            <li>Концептуално слична на tuple</li>
-        </ul>
-        <li>List</li>
-        <ul><li>Mutable</li><li>Потредена секвенца од елементи од различни типови</li>
-    </ul></ol>
-</section>
+                <section>
+                    <h3>Секвенци</h3>
+                    <ol><li>Tuple</li>
+                        <ul>
+                            <li>Едноставна, подредена секвенца од елементи</li>
+                            <li>Immutable</li>
+                            <li>Елементите може да бидат од разни типови вклучувајќи и други колекции</li>
+                        </ul>
+                        <li>String</li>
+                        <ul>
+                            <li>Immutable</li>
+                            <li>Концептуално слична на tuple</li>
+                        </ul>
+                        <li>List</li>
+                        <ul><li>Mutable</li><li>Потредена секвенца од елементи од различни типови</li>
+                    </ul></ol>
+                </section>
 
-<section style="text-align:left">
-<h3>Секвенци</h3>
-<ul style="width: 600px;">
-<li>Tuples</li>
-<li>
-<pre><code class="python">>>> tu = (23, 'abc', 4.56, (2,3), 'def')</code></pre>
-</li>
+                <section style="text-align:left">
+                    <h3>Секвенци</h3>
+                    <ul style="width: 600px;">
+                        <li>Tuples</li>
+                        <li>
+                            <pre><code class="python">>>> tu = (23, 'abc', 4.56, (2,3), 'def')</code></pre>
+                        </li>
 
-<li>Lists</li>
-<pre><code class="python">>>> li = ["abc", 34, 4.34, 23]</code></pre>
-<li>Strings</li>
-<li>
-<pre><code class="python">>>> st="Hello World"
+                        <li>Lists</li>
+                            <pre><code class="python">>>> li = ["abc", 34, 4.34, 23]</code></pre>
+                        <li>Strings</li>
+                        <li>
+                            <pre><code class="python">>>> st="Hello World"
 >>> st='Hello World'
 >>> st="""This is a multi-line
 that uses triple quotes."""
 </code></pre>
-</li>
-</ul>
-</section>
+                        </li>
+                    </ul>
+                </section>
 
-<section>
-<h3>Секвенци</h3>
-<ul>
-<li>Пристапот до елементи е 0 based
-<pre><code class="python" style="width: 800px">>>> tu = (23, 'abc', 4.56, (2,3), 'def')
+                <section>
+                    <h3>Секвенци</h3>
+                    <ul>
+                        <li>Пристапот до елементи е 0 based
+                            <pre><code class="python" style="width: 800px">>>> tu = (23, 'abc', 4.56, (2,3), 'def')
 >>> tu[1]	# Second item in the tuple.
 'abc'
 >>> li = ["abc", 34, 4.34, 23]
@@ -319,23 +336,23 @@ that uses triple quotes."""
 >>> st[1]	# Second character in string.
 'e'
 </code></pre>
-</li>
-<li>Позитивни и негативни индекси</li>
-<pre><code class="python" style="width: 800px">>>> t = (23, 'abc', 4.56, (2,3), 'def')
+                        </li>
+                        <li>Позитивни и негативни индекси</li>
+                            <pre><code class="python" style="width: 800px">>>> t = (23, 'abc', 4.56, (2,3), 'def')
 >>> t[1]	#Positive index: count from the left, starting with 0
 'abc'
 >>> t[-3]	#Negative lookup: count from right, starting with –1
 4.56
 </code></pre>
-</li>
-</ul>
-</section>
+                        </li>
+                    </ul>
+                </section>
 
-<section>
-<h3>Секвенци</h3>
-<ul>
-<li>Slicing and Copying
-<pre><code style="max-height: 1000px; width: 800px" class="python">>>> t = (23, 'abc', 4.56, (2,3), 'def')
+                <section>
+                    <h3>Секвенци</h3>
+                    <ul>
+                        <li>Slicing and Copying
+                            <pre><code style="max-height: 1000px; width: 800px" class="python">>>> t = (23, 'abc', 4.56, (2,3), 'def')
 # Return a copy of the container with a subset of the original
 # members. Start copying at the first index, and stop copying
 # before the second index.
@@ -359,14 +376,14 @@ that uses triple quotes."""
 # 2 names refer to 1 ref so changing one affects both
 >>> list2 = list1[:] # Two independent copies, two refs
 </code></pre>
-</li>
-</ul>
-</section>
+                        </li>
+                    </ul>
+                </section>
 
-<section>
-<h3>Секвенци</h3>
-<div style="float:left; width: 500px;">
-<pre><code style="max-height: 1000px; " class="python"># The 'in' operator
+                <section>
+                    <h3>Секвенци</h3>
+                    <div style="float:left; width: 500px;">
+                        <pre><code style="max-height: 1000px; " class="python"># The 'in' operator
 # Boolean test whether a value is inside a container:
 >>> t = [1, 2, 4, 5]
 >>> 3 in t
@@ -391,9 +408,9 @@ False
 >>> "Hello" + " " + "World"
 'Hello World'
 </code></pre>
-</div>
-<div style="float:left; width: 400px;">
-<pre><code style="max-height: 1000px; " class="python"># The * Operator produces a new tuple, list, or string that "repeats" the original content
+                    </div>
+                    <div style="float:left; width: 400px;">
+                        <pre><code style="max-height: 1000px; " class="python"># The * Operator produces a new tuple, list, or string that "repeats" the original content
 >>> (1, 2, 3) * 3
 (1, 2, 3, 1, 2, 3, 1, 2, 3)
 >>> [1, 2, 3] * 3
@@ -401,25 +418,25 @@ False
 >>> “Hello” * 3
 'HelloHelloHello'
 </code></pre>
-</div>
-</section>
+                    </div>
+                </section>
 
-<section>
-<h3>Секвенци</h3>
-<pre><code class="python"># Tuples: Immutable
+                <section>
+                    <h3>Секвенци</h3>
+                    <pre><code class="python"># Tuples: Immutable
 >>> t = (23, 'abc', 4.56, (2,3), 'def')
 >>> t[2] = 3.14</code></pre>
-<pre><code class="python">Traceback (most recent call last):
+                    <pre><code class="python">Traceback (most recent call last):
 File "<pyshell#75>", line 1, in -toplevel-
 tu[2] = 3.14
 TypeError: object doesn't support item assignment
 </code></pre>
-<pre><code class="python"># You can't change a tuple.
+                    <pre><code class="python"># You can't change a tuple.
 # You can make a fresh tuple and assign its reference to a previously
 # used name
 >>> t = (23, 'abc', 3.14, (2,3), 'def')
 </code></pre>
-<pre><code class="python"># Lists: Mutable
+                    <pre><code class="python"># Lists: Mutable
 # We can change lists in place
 # Name li still points to the same memory reference when we're done
 # The mutability of lists means that they aren't as fast as tuples
@@ -428,11 +445,11 @@ TypeError: object doesn't support item assignment
 >>> li
 ['abc', 45, 4.34, 23]
 </code></pre>
-</section>
+                </section>
 
-<section>
-<h3>Примери за работа со листи</h3>
-<pre><code style="max-height: 1000px" class="python">>>> li = [1, 11, 3, 4, 5]
+                <section>
+                    <h3>Примери за работа со листи</h3>
+                    <pre><code style="max-height: 1000px" class="python">>>> li = [1, 11, 3, 4, 5]
 >>> li.append('a') 	# Our first exposure to method syntax
 >>> li
 [1, 11, 3, 4, 5, 'a']
@@ -458,39 +475,40 @@ TypeError: object doesn't support item assignment
 [2, 5, 6, 8] 
 >>> li.sort(func) 	# sort in place using user-defined comparison
 </code></pre>
-</section>
+                </section>
 
-<section>
-<h3>Tuples vs. Lists</h3>
-<ul>
-<li>Листите се побавни, но помоќни од tuples</li>
-<li>Листите може да се модифицираат</li>
-<li>Tuples се immutable и имаат многу помалку функционалности</li>
-<li>За конверзија меѓу tuples и листи се користат функциите <strong>list()</strong> и <strong>tuple()</strong>:
-<pre><code class="python">li = list(tu)
+                <section>
+                    <h3>Tuples vs. Lists</h3>
+                    <ul>
+                        <li>Листите се побавни, но помоќни од tuples</li>
+                        <li>Листите може да се модифицираат</li>
+                        <li>Tuples се immutable и имаат многу помалку функционалности</li>
+                        <li>За конверзија меѓу tuples и листи се користат функциите <strong>list()</strong> и <strong>tuple()</strong>:
+                            <pre><code class="python">li = list(tu)
 tu = tuple(li)</code></pre>
-</li>
-</ul>
-</section>
+                        </li>
+                    </ul>
+                </section>
 
-<section style="width: 15000px;">
-<h3>Мапи - Dictionary</h3>
-<table>
-<tr><td>
-<pre><code class="python">>>> d = {'user':'bozo', 'pswd':123}
+                <section style="width: 15000px;">
+                    <h3>Мапи - Dictionary</h3>
+                    <table>
+                        <tr>
+                            <td>
+                                <pre><code class="python">>>> d = {'user':'bozo', 'pswd':123}
 >>> d['user']
 'bozo'
 >>> d['pswd']
 123
 >>> d['bozo']
 </code></pre>
-<pre><code>Traceback (innermost last):
+                                <pre><code>Traceback (innermost last):
 File '&ltinteractive input&gt' line 1, in ?
 KeyError: bozo</code></pre>
-</td>
-<td>
+                            </td>
+                            <td>
 
-<pre><code class="python" style="max-height:600px;width: 500px;">>>> d = {'user':'bozo', 'pswd':1234}
+                                <pre><code class="python" style="max-height:600px;width: 500px;">>>> d = {'user':'bozo', 'pswd':1234}
 >>> d['user'] = 'clown'
 >>> d
 {'user':'clown', 'pswd':1234}
@@ -512,44 +530,52 @@ KeyError: bozo</code></pre>
 >>> d.items() 	# List of item tuples.
 [('user','bozo'), ('p',1234), ('i',34)]
 </code></pre>
-</td></tr></table>
-</section>
+                            </td>
+                        </tr>
+                    </table>
+                </section>
 
-<section style="text-align:left">
-<h3>Функции</h3>
-<ul><li>
-Дефинирање на функција со <strong>def</strong>
-<pre><code class="python">def times(x, y):
+                <section style="text-align:left">
+                    <h3>Функции</h3>
+                    <ul>
+                        <li>
+                            Дефинирање на функција со <strong>def</strong>
+                            <pre><code class="python">def times(x, y):
   return x * y
 </code></pre>
-</li>
-<li>Опционални аргументи
-<pre><code class="python">def func(a, b, c = 10, d = 100):
+                        </li>
+                        <li>Опционални аргументи
+                            <pre><code class="python">def func(a, b, c = 10, d = 100):
   print a, b, c, d
 >>> func(1, 2)
 1 2 10 100
 >>> func(1, 2, 3, 4)
 1 2 3 4
 </code></pre>
-</section>
+                        </li>
+                    </ul>
+                </section>
 
-<section style="text-align:left">
-<h3>Функции</h3>
-<li>Сите функции враќаат вредност</li>
-<li>Дури и кога <strong>return</strong> не е експлицитно искористена</li>
-<li>Функциите без <strong>return</strong> директива ја враќаат специјалната вресност <strong>None</strong></li>
-<li>Не постои <strong>overloading</strong> на функции</li>
-<li>Две различни функции не може да имаат исто име дури и ако листата на аргументи е различна</li>
-<li>Функциите може да се користат како било која друга променлива (функции од повисок тип).</li>
-<li>Можат да бидат: аргументи на друга функција, return вредност на функција, можат да се доделуваат на променливи, може да се елементи на листи итн.
-</li></ul>
-</section>
+                <section style="text-align:left">
+                    <h3>Функции</h3>
+                    <ul>
+                        <li>Сите функции враќаат вредност</li>
+                        <li>Дури и кога <strong>return</strong> не е експлицитно искористена</li>
+                        <li>Функциите без <strong>return</strong> директива ја враќаат специјалната вресност <strong>None</strong></li>
+                        <li>Не постои <strong>overloading</strong> на функции</li>
+                        <li>Две различни функции не може да имаат исто име дури и ако листата на аргументи е различна</li>
+                        <li>Функциите може да се користат како било која друга променлива (функции од повисок тип).</li>
+                        <li>Можат да бидат: аргументи на друга функција, return вредност на функција, можат да се доделуваат на променливи, може да се елементи на листи итн.
+                        </li>
+                    </ul>
+                </section>
 
 
-<section>
-<h3>Структурата if/elif/else</h3>
-<ul style="width:800px"><li>Слична како во други програмски јазици
-<pre><code class="python">person = 'Luke'
+                <section>
+                    <h3>Структурата if/elif/else</h3>
+                    <ul style="width:800px">
+                        <li>Слична како во други програмски јазици
+                            <pre><code class="python">person = 'Luke'
 if person == 'Per':
     status = 'Pythonist'
 elif person == 'Luke':
@@ -558,13 +584,15 @@ else:
     status = 'unknown'
 print person, status
 </code></pre>
-</li></ul>
-</section>
+                        </li>
+                    </ul>
+                </section>
 
-<section>
-<h3>Структурата for</h3>
-<ul><li>Во python for е слична на for each во други програмски јазици
-<pre><code class="python">s = 0
+                <section>
+                    <h3>Структурата for</h3>
+                    <ul>
+                        <li>Во python for е слична на for each во други програмски јазици
+                            <pre><code class="python">s = 0
 # walk through list, assign to i
 for i in [0, 1, 2, 3, 4, 5, 6, 7, 8]:
     s = s + i
@@ -574,7 +602,7 @@ for i in [0, 1, 2, 3, 4, 5, 6, 7, 8]:
 print "i=%i, s=%i" % (i, s)
 </code></pre>
 
-<pre><code class="python">r = []
+                            <pre><code class="python">r = []
 # walks through string, char by char
 for c in 'this is a string with blanks':  
     if c == ' ': continue	# skip rest of block, continue loop
@@ -582,40 +610,41 @@ for c in 'this is a string with blanks':
 
 print ''.join(r)
 </code></pre>
-</li>
-</ul>
-</section>
+                        </li>
+                    </ul>
+                </section>
 
-<section>
-<h3>Структурата for</h3>
-<ul>
-<li>
-Со користење на функциите <strong>range</strong> и <strong>xrange</strong> станува слична на for структурата во C, Java итн.</li>
-<li>Функцијата <strong>range</strong> креира листа што може да биде доста неефикасно во поглед на меморија
-<pre><code class="python">>>> range(9)			# start=0, step=1 by default
+                <section>
+                    <h3>Структурата for</h3>
+                    <ul>
+                        <li>
+                        Со користење на функциите <strong>range</strong> и <strong>xrange</strong> станува слична на for структурата во C, Java итн.</li>
+                        <li>Функцијата <strong>range</strong> креира листа што може да биде доста неефикасно во поглед на меморија
+                            <pre><code class="python">>>> range(9)			# start=0, step=1 by default
 [0, 1, 2, 3, 4, 5, 6, 7, 8]
 >>> range(1, 12, 3)		# explicit start, end, step
 [1, 4, 7, 10]
 >>> range(10**9)		# MemoryError!
 </code></pre>
-</li>
-<li>
-Функцијата <strong>xrange</strong> креира итератор што е многу мемориски поефикасно од користење на range
-<pre><code class="python">s = 0
+                        </li>
+                        <li>
+                            Функцијата <strong>xrange</strong> креира итератор што е многу мемориски поефикасно од користење на range
+                            <pre><code class="python">s = 0
 for i in xrange(100000):
     if i % 19 == 0:	# remainder: evenly divisible with 19?
         s = s + i
 print s
 </code></pre>
-</li></ul>
-</section>
+                        </li>
+                    </ul>
+                </section>
 
-<section>
-<h3>Структурата while</h3>
-<ul style="width:800px;">
-<li>
-Слична како во C или Java
-<pre><code class="python">#!/usr/bin/env python
+                <section>
+                    <h3>Структурата while</h3>
+                    <ul style="width:800px;">
+                        <li>
+                            Слична како во C или Java
+                            <pre><code class="python">#!/usr/bin/env python
 def fib(n): # return Fibonacci series up to n
   """Return a list containing the Fibonacci series up to n."""
   result = []
@@ -626,12 +655,13 @@ def fib(n): # return Fibonacci series up to n
   return result
 print fib(100)	# [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
 </code></pre>
-</li></ul>
-</section>
+                        </li>
+                    </ul>
+                </section>
 
-<section>
-<h3>Работа со String-ови</h3>
-<pre><code style="max-height:1000px;" class="python">>>> s = 'a string, with stuff'
+                <section>
+                    <h3>Работа со String-ови</h3>
+                    <pre><code style="max-height:1000px;" class="python">>>> s = 'a string, with stuff'
 >>> s.count('st')                  # how many substrings?
 2
 >>> s.find('stu')                  # give location of substring, if any
@@ -651,11 +681,11 @@ True
 >>> s.replace('s', 'X', 1)         # replace only once
 'a Xtring, with stuff'
 </code></pre>
-</section>
+                </section>
 
-<section>
-<h3>Работа со String-ови</h3>
-<pre><code style="max-height:1000px; width:980px; font-size:18px;" class="python"># Returns index of string2 string in referenced string1.
+                <section>
+                    <h3>Работа со String-ови</h3>
+                    <pre><code style="max-height:1000px; width:980px; font-size:18px;" class="python"># Returns index of string2 string in referenced string1.
 'string1'.find('string2') 
 # Returns string value of list1 but with string1 in between words.
 'string1'.join(list1) 
@@ -676,20 +706,22 @@ True
 # Returns the number of times that string2 appears in string1. 
 'string1'.count('string2') 
 </code></pre>
-</section>
+                </section>
 
-<section>
-<h3>Стандарден Влез/Излез (std i/o)</h3>
-<ul>
-<li>
-За читање од стандарден влез се користат наредбите <strong>input</strong> и <strong>raw_input</strong></li>
-<ul><li>input го интерпретира влезот па враќа</li>
-<li>raw_input го враќа точниот string како што е внесен</li>
-</ul>
-<li>Функцијата <strong>print</strong> печати на стандарден излез
-exactly as typed, data not in quotes is interpreted first</li>
-<li>
-<pre><code class="python">>>> x = input('enter a number: ')
+                <section>
+                    <h3>Стандарден Влез/Излез (std i/o)</h3>
+                    <ul>
+                        <li>
+                            За читање од стандарден влез се користат наредбите <strong>input</strong> и <strong>raw_input</strong>                        
+                            <ul>
+                                <li>input го интерпретира влезот па враќа</li>
+                                <li>raw_input го враќа точниот string како што е внесен</li>
+                            </ul>
+                        </li>
+                        <li>Функцијата <strong>print</strong> печати на стандарден излез
+                        </li>
+                        <li>
+                            <pre><code class="python">>>> x = input('enter a number: ')
 enter a number: 3+4
 >>> x
 7
@@ -705,13 +737,19 @@ enter two numbers: 3+4, 2*2
 >>> print 'a', 1+2, c, "c"
 a 3 4 c
 </code></pre>
-</section>
+                        </li>
+                    </ul>
+                </section>
 
-<section style="text-align:left">
-<h3>Пристап до аргументи</h3>
-<ul>
-<li>Преку модулот sys</li></ul>
-<pre><code class="python" style="width: 900px">#!/usr/bin/python
+                <section style="text-align:left">
+                    <h3>Пристап до аргументи</h3>
+                    <ul>
+                        <li>Преку модулот sys</li>
+                        <li>
+                            <a href="http://docs.python.org/2/library/sys.html">http://docs.python.org/2/library/sys.html</a>
+                        </li>
+                    </ul>
+                    <pre><code class="python" style="width: 900px">#!/usr/bin/python
 import re
 import sys
 if len(sys.argv) != 3:
@@ -725,24 +763,24 @@ for k in lines:
 print 'The regular express', sys.argv[2], \ 
 'was found', count, 'times in the file', sys.argv[1]
 </code></pre>
-</section>
+                </section>
 
 
-<section>
-<h3>Работа со датотеки</h3>
-<ul>
-<li><strong>filevar.read()</strong> - ја чита целата датотека</li>
-<li><strong>filevar.readline()</strong> - чита една линија од датотеката</li>
-<li><strong>filevar.readlines()</strong> - ја чита целата датотека како низа од string-ови, по еден string за секоја линија</li>
-<li><strong>filevar.seek(offset,from what)</strong> seek offset bytes from either
-beginning (0), current position (1) or end of file (2). If you
-don't have a from what it seeks from the beginning of the file</li>
-</ul>
-</section>
+                <section>
+                    <h3>Работа со датотеки</h3>
+                    <ul>
+                        <li><strong>filevar.read()</strong> - ја чита целата датотека</li>
+                        <li><strong>filevar.readline()</strong> - чита една линија од датотеката</li>
+                        <li><strong>filevar.readlines()</strong> - ја чита целата датотека како низа од string-ови, по еден string за секоја линија</li>
+                        <li><strong>filevar.seek(offset,from what)</strong> seek offset bytes from either
+                        beginning (0), current position (1) or end of file (2). If you
+                        don't have a from what it seeks from the beginning of the file</li>
+                    </ul>
+                </section>
 
-<section>
-<h3>Работа со датотеки</h3>
-<pre><code class="python">#!/usr/bin/python
+                <section>
+                    <h3>Работа со датотеки</h3>
+                    <pre><code class="python">#!/usr/bin/python
 infile=file('Text.txt','r')
 for i in range(5):
   line = infile.readline()
@@ -756,7 +794,7 @@ count = count + 1
 outfile.write('This is line number %d' % (count))
 outfile.close()
 </code></pre>
-<pre><code class="python">#!/usr/bin/python
+                    <pre><code class="python">#!/usr/bin/python
 infile=file('input.txt','r')
 outfile=file('out.txt','w')
 linelist=infile.readlines()
@@ -764,15 +802,17 @@ linelist=infile.readlines()
 for i in range(1,len(linelist),10):
   outfile.write(linelist[i])
 </code></pre>
-</section>
+                </section>
 
-<section>
-<h3>Пример 1</h3>
-<ul><li>
-Да се испечати содржината на датотеките дадени како аргументи на скриптата
-</li></ul>
+                <section id="primer1">
+                    <h3>Пример 1</h3>
+                    <ul>
+                        <li>
+                            Да се испечати содржината на датотеките дадени како аргументи на скриптата
+                        </li>
+                    </ul>
 
-<pre><code class="python">#!/usr/bin/python
+                    <pre><code class="python">#!/usr/bin/python
 # Print the contents of the files listed on the command line.
 import sys
 for fn in sys.argv[1:]:
@@ -788,14 +828,16 @@ for fn in sys.argv[1:]:
     fin.close()
 print
 </code></pre>
-</section>
+                </section>
 
-<section style="text-align:left">
-<h3>Пример 2</h3>
-<ul><li>
-Некои од функциите во модулот sys
-</li></ul>
-<pre><code class="python">#!/usr/bin/python
+                <section style="text-align:left" id="primer2">
+                    <h3>Пример 2</h3>
+                    <ul>
+                        <li>
+                            Некои од функциите во модулот sys
+                        </li>
+                    </ul>
+                    <pre><code class="python">#!/usr/bin/python
 # Various stuff from the sys module.
 import sys, os, glob
 print "sys.argv:", sys.argv
@@ -811,14 +853,42 @@ print "os:", dir(os)
 print
 os.system('ls -l')
 </code></pre>
-</section>
+                    <div>glob — Unix style pathname pattern expansion</div>
+                    <a href="http://docs.python.org/2/library/glob.html">http://docs.python.org/2/library/glob.html</a>
+                </section>
 
-<section style="text-align:left">
-<h3>Пример 3</h3>
-<ul><li>
-Да се излистаат сите .gif датотеки од тековниот директориум
-</li></ul>
-<pre><code class="python">#!/usr/bin/python
+                <section>
+                    
+                    <h3><b>os</b> — Miscellaneous operating system interfaces</h3>
+                    
+                    <ul>
+                        <li>Начин за пристап до функционалностите на оперативниот систем</li>
+                        <li>
+                            <a href="http://docs.python.org/2/library/os.html">
+                                http://docs.python.org/2/library/os.html
+                            </a>
+                        
+                        
+                            <ul>
+                                <li>Process Parameters</li>
+                                <li>File Object Creation</li>
+                                <li>File Descriptor Operations</li>
+                                <li>Files and Directories</li>
+                                <li>Process Management</li>
+                                <li>Miscellaneous System Information</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </section>
+
+                <section style="text-align:left" id="primer3">
+                    <h3>Пример 3</h3>
+                    <ul>
+                        <li>Да се излистаат сите .gif датотеки од тековниот директориум</li>
+                        
+                    </ul>
+                    <pre><code class="python">#!/usr/bin/python
 # Use the standard find method to look for GIF files.
 import sys, find
 if len(sys.argv) > 1:
@@ -834,11 +904,18 @@ for dir in dirs:
     else:
         print "For", dir + ': None'
 </code></pre>
-</section>
+                </section>
 
-<section style="text-align:left">
-<h3>Пример 4</h3>
-<pre><code class="python" style="font-size:14px;line-height:14px;">#!/usr/bin/python
+                <section style="text-align:left">
+                    <h3>Пример 4 (1)</h3>
+                    <div>
+                    <pre><code>cat /etc/passwd</code>
+root:x:0:0:root:/root:/bin/bash
+riste:x:1000:1000:Riste Stojanov,,,:/home/riste:/bin/bash
+bin:x:2:2:bin:/bin:/bin/sh
+sys:x:3:3:sys:/dev:/bin/sh
+</pre>
+                    <pre><code class="python" >#!/usr/bin/python
 # List the account and human names for each person who's logged on.
 # The information is taken from the password file, which is
 # read and loaded first.  The command line argument (if given) is
@@ -858,7 +935,14 @@ if len(argv) > 1:
 fin = open(infile, 'r')
 # Read the password file and load the information.
 for line in fin.readlines():
-    # Lines starting with # are comments.  Clean leading spaces, and
+    
+</code></pre>
+                </section>
+
+
+                <section style="text-align:left">
+                    <h3>Пример 4 (2)</h3>
+                    <pre><code class="python" >    # Lines starting with # are comments.  Clean leading spaces, and
     # skip comments.
     line = lstrip(line)
     if line == '' or line[0] == '#':
