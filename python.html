@@ -1,0 +1,1308 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+
+        <title>Python - Командни процедури во UNIX</title>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+        <link rel="stylesheet" href="css/reveal.css"/>
+        <link rel="stylesheet" href="css/theme/simple.css" id="theme"/>
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css"/>
+<!--        <link rel="stylesheet" href=" css/print/pdf.css"/>-->
+        <link rel="stylesheet" href="fonts/stobi.css"/>
+        <style type="text/css">
+            .reveal { font-family: StobiSans; } 
+            .reveal pre code { max-height: 1000px; }
+            .reveal pre { width: 98%; margin: 0px; }
+            .reveal h1, .reveal h2, .reveal h3, .reveal h4 { 
+            font-family: StobiSerif; 
+            text-align: left;
+            #            text-decoration: underline;
+            font-weight: bold;
+            border-bottom: 1px dashed  silver;
+            }
+            .reveal h1 { text-align: center; }
+            .reveal li { padding: 5px 0px; }
+            .reveal .footer { width: 70px; height: 50px; position:absolute; top: 45%; left: 50%; background-image: url('img/finki-logo-small.jpg') }
+        </style>
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write('<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print" />' );
+        </script>
+
+        <!--[if lt IE 9]>
+            <script src="lib/js/html5shiv.js">
+                /        </script>
+            <![endif]-->
+    </head>
+
+    <body>
+        <div class="reveal">
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <div class="footer"></div>
+                <section>
+                    <h2 style="text-align:center;border:none">
+                        Python</h2>
+                    <h4 style="text-align:center;border:none">
+                        Командни процедури во UNIX</h4>
+<img src="img/front.jpg" style="width: 300px; height: 290px; border:none"/>
+                </section>
+
+                <section>
+                    <h3>Вовед во python</h3>
+                    <ul>
+                        <li>Open source general-purpose јазик.</li>
+                        <ul><li>Објектно Ориентиран, Императивен, Функционален</li></ul>
+                        <li>Лесен за интеграција со C/ObjC/Java/Fortran</li>
+                        <li>Downloads: <a href="http://www.python.org">
+                                http://www.python.org</a>
+                        </li>
+                        <li>Документација: 
+                            <a href="http://www.python.org/doc/">
+                                http://www.python.org/doc/</a></li>
+                        <li>Бесплатна книга: 
+                            <a href="http://www.diveintopython.org">
+                                http://www.diveintopython.org</a></li>
+                        <li>Одличен cheat sheet: 
+                            <a href="https://docs.google.com/file/d/0B9VT_L2CDnKvODYyNTc5NjktYmMyOC00NDFkLTliNTctMzQzMTAzYjUyYmYy/view?pli=1&sle=true">
+                                линк</a></li>
+                        <li>Преинсталиран на Mac OS X и Linux</li>
+                        <li>Windows downloads: <a href="http://www.python.org">
+                                http://www.python.org</a> </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Python интерпретер</h3>
+                    <ul>
+                        <li>
+                            Интерактивен интерфејс кон Python</li>
+                        <li>REPL (Read Eval Print Loop)</li>
+                        <li>
+                            <pre><code contenteditable class="bash">~$ python
+Python 2.7.3 (default, Sep 26 2012, 21:51:14) 
+[GCC 4.7.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+</code></pre>
+</li>
+<li>
+    Внесениот израз се евалуира веднаш
+    <pre><code contenteditable class="python">>>>3*(7+2)
+27</code></pre>
+</li>
+
+<li>За излегување од REPL околината внесете: CTRL-D</li>
+</ul>
+</section>
+
+
+<section>
+	   <h3>Python скрипти во UNIX</h3>
+    <ol>
+        <li>Извршување на датотека преку внесување на python и името на датотеката:
+            <pre><code class="bash">~$ python filename.py</code></pre></li>
+        <li>Извршување како UNIX извршна датотека:
+            <ul><li>.py датеката треба да ја има соодветната пермисија за извршување 'x'</li>
+                <li>Датотеката треба да почнува со<pre><code>#!/usr/bin/env python</code></pre></li>
+                <li>Извршување како извршна датотека:
+                    <pre><code>~$ ./filename.py</code></pre>
+                </li>
+
+    </ol>
+    </ul>
+</section>
+
+<section>
+	   <h3>Hello world</h3>
+ <pre><code class="python">>>> print 'Hello world!'
+Hello world!</code></pre>
+
+ <pre><code class="python">>>> a = 'Hello world!'
+>>> print a
+Hello world!</code></pre>
+</section>
+
+<section>
+<h3>Едноставен пример</h3>
+<pre><code class="python">x = 34 - 23 			# Ова е коментар
+y, z = "Hello", 3.45		# Повеќекратко доделување на вредност
+if z == 3.45 or y == “Hello”: 	# if statement
+ x = x + 1
+ y = y + "World"		# Конкатенација на string-ови
+print x				# Печатење на std out
+print y</code></pre>
+
+<ul style="line-height:1.1em;">
+<li>За доделување се користи = додека за споредба ==
+<li>За броеви <strong>+ - * / %</strong> како во C или Java</li>
+<ul><li>За конкатенација на string-ови <strong>+</strong></li>
+<li>За форматирање на string-ови <strong>%</strong> (како printf во C)</li></ul>
+<li>Логичките оператори со зборовите <strong>and, or, not</strong></li>
+<li>Основната наредба за печатење е <strong>print</strong></li>
+<li>Не е потребна декларација на променливи</li>
+<ul><li>Типот на променливите не се декларира експлицитно</li>
+<li>Python сам го <strong>погодува</strong> типот на променливите</li></ul>
+</ul>
+
+</section>
+
+<section>
+	   <h3>Основни податочни типови</h3>
+    <ul>
+        <li>
+            <strong>Integer</strong> (default-ен тип за броеви)</li>
+        <li><pre><code class="python">z = 5 / 2 # Резултатот е 2, делење на integer-и</code></pre></li>
+        <li><strong>Float</strong>
+            <pre><code class="python">x = 3.456</code></pre>
+</li>
+        <li><strong>String</strong></li>
+        <ul>
+            <li>Се дефинираат со користење на "" или ''
+            <pre><code class="python">"abc" == 'abc'</code></pre></li>
+            <li>Се користат тројни наводници за дефинирање на string во повеќе линии или на string кој содржи &quot или '</li>
+            <li><pre><code class="python">"""a'
+b&quotc"""</code></pre>
+                </li>
+        </ul>
+</section>
+
+<section>
+	   <h3>Whitespace</h3>
+<ul><li>    
+Whitespace-ите има значење во Python, особено назабувањата и новите линии</li>
+    <li>Се користи нова линија за завршување на линија со код</li>
+    <li>Се користи <strong>\</strong> кога мора да се оди за започнување на нова наредба без нова линија</li>
+    <li>Наместо <strong>{ }</strong> за означување на блок со код се користи конзистентно назабување</li>
+    <li>Првата линија со помало назабување е надвор од тој блокот со код од претходната линија</li>
+    <li>Првата линија со поголемо назабуање од претходната започнува нов вгнезден блок</li>
+    <li>Често се користи <strong>:</strong> за започнување на нов блок (при декларирање на функциии класи)</li>
+</ul>
+</section>
+
+<section>
+	   <h3>Коментари</h3>
+<ul><li>  
+    Коментарите започнуват со <strong>#</strong></li>
+    <li>String-от кој се наоќа на првата линија после декларација на функција или класа е документација за соодветната функција или класа</li>
+<li>Се користи од debug-ери, IDE алатки итн.</li>
+    <li>Пример:
+<pre><code class="python">def my_function(x, y):
+  """This is the docstring. This
+  function does blah blah blah."""
+  # The code would go here...
+</code></pre>
+</li>
+</li></ul>
+</section>
+
+<section>
+	   <h3>Доделување</h3>
+<ul style="line-height: 1.1em"><li>  
+    Доделување на променлива во Python значи задавање на <strong>име</strong> на <strong>референца</strong> кон некој <strong>објект</strong>
+    <li>Доделувањето креира нови референци, не копира цели објекти
+    <li>Променливите во Python немаат типови, туку објектите имаат типови
+    <li>Python го одредува типот на референцата автоматски врз основа на објектот доделен на применливата
+    <li>Промелиците се декларираат имплицитно, првиот пат кога ќе се појават на левата страна на израз за доделување
+    <pre><code class="python">x = 3</code></pre>
+</li>
+    <li>Референците се уништуваат преку garbage collection откако не се веќе референцирани од некоја променлива
+</li></ul>
+</section>
+
+<section>
+	   <h3>Пристапување до непостоечки променливи</h3>
+    <ul><li>
+            Ако се пристапи до применлива која се уште не е правилно креирана, се добива грешка
+<pre><code class="python">>>> y
+Traceback (most recent call last):
+ File "<pyshell#16>", line 1, in -toplevel-
+  y
+NameError: name 'y' is not defined
+>>> y = 3
+>>> y
+3
+</code></pre>
+</li></ul>
+</section>
+
+<section>
+	   <h3>Повеќекратно доделување</h3>
+<ul><li>Повеќекратно доделување на повеќе променливи во иста кодна линија
+<pre><code class="python">>>> x, y = 2, 3
+>>> x
+2
+>>> y
+3
+</code></pre>
+</li></ul>
+</section>
+
+<section>
+	   <h3>Именување на променливи</h3>
+<ul>
+<li>Имињата на променливите се case sensitive и не може да почнуваат со број. Може да содржат букви, броеви и долни линии (underscore). Пример:
+<pre><code class="python">bob
+Bob
+_bob
+_2_bob_
+bob_2
+BoB
+</code></pre>
+</li>
+<li>Резервирани зборови:
+<pre><code class="python">and, assert, break, class, continue, def, del, 
+elif, else, except, exec, finally, for, from, 
+global, if, import, in, is, lambda, not, or, 
+pass, print, raise, return, try, while
+</code></pre></li>
+</ul>
+</section>
+
+<section>
+    <h3>Секвенци</h3>
+    <ol><li>Tuple</li>
+        <ul>
+            <li>Едноставна, подредена секвенца од елементи</li>
+            <li>Immutable</li>
+            <li>Елементите може да бидат од разни типови вклучувајќи и други колекции</li>
+        </ul>
+        <li>String</li>
+        <ul>
+            <li>Immutable</li>
+            <li>Концептуално слична на tuple</li>
+        </ul>
+        <li>List</li>
+        <ul><li>Mutable</li><li>Потредена секвенца од елементи од различни типови</li>
+    </ul></ol>
+</section>
+
+<section style="text-align:left">
+<h3>Секвенци</h3>
+<ul style="width: 600px;">
+<li>Tuples</li>
+<li>
+<pre><code class="python">>>> tu = (23, 'abc', 4.56, (2,3), 'def')</code></pre>
+</li>
+
+<li>Lists</li>
+<pre><code class="python">>>> li = ["abc", 34, 4.34, 23]</code></pre>
+<li>Strings</li>
+<li>
+<pre><code class="python">>>> st="Hello World"
+>>> st='Hello World'
+>>> st="""This is a multi-line
+that uses triple quotes."""
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h3>Секвенци</h3>
+<ul>
+<li>Пристапот до елементи е 0 based
+<pre><code class="python" style="width: 800px">>>> tu = (23, 'abc', 4.56, (2,3), 'def')
+>>> tu[1]	# Second item in the tuple.
+'abc'
+>>> li = ["abc", 34, 4.34, 23]
+>>> li[1]	# Second item in the list.
+34
+>>> st = "Hello World"
+>>> st[1]	# Second character in string.
+'e'
+</code></pre>
+</li>
+<li>Позитивни и негативни индекси</li>
+<pre><code class="python" style="width: 800px">>>> t = (23, 'abc', 4.56, (2,3), 'def')
+>>> t[1]	#Positive index: count from the left, starting with 0
+'abc'
+>>> t[-3]	#Negative lookup: count from right, starting with –1
+4.56
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h3>Секвенци</h3>
+<ul>
+<li>Slicing and Copying
+<pre><code style="max-height: 1000px; width: 800px" class="python">>>> t = (23, 'abc', 4.56, (2,3), 'def')
+# Return a copy of the container with a subset of the original
+# members. Start copying at the first index, and stop copying
+# before the second index.
+>>> t[1:4]
+('abc', 4.56, (2,3))
+>>> t[1:-1]	# We can also use negative indices when slicing.
+('abc', 4.56, (2,3))
+# Omit the first index to make a copy starting from the beginning
+# of the container.
+>>> t[:2]	
+(23, 'abc')
+# Omit the second index to make a copy starting at the first index
+# and going to the end of the container.
+>>> t[2:] 	
+(4.56, (2,3), 'def')
+# To make a copy of an entire sequence, you can use [:].
+>>> t[:]
+(23, 'abc', 4.56, (2,3), 'def')
+# Note the difference between these two lines for mutable sequences
+>>> list2 = list1
+# 2 names refer to 1 ref so changing one affects both
+>>> list2 = list1[:] # Two independent copies, two refs
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h3>Секвенци</h3>
+<div style="float:left; width: 500px;">
+<pre><code style="max-height: 1000px; " class="python"># The 'in' operator
+# Boolean test whether a value is inside a container:
+>>> t = [1, 2, 4, 5]
+>>> 3 in t
+False
+>>> 4 in t
+True
+>>> 4 not in t
+False
+# For strings, tests for substrings
+>>> a = 'abcde'
+>>> 'c' in a
+True
+>>> 'cd' in a
+True
+>>> 'ac' in a
+False
+# The '+' Operator produces a new tuple, list, or string whose value is the concatenation of its arguments
+>>> (1, 2, 3) + (4, 5, 6)
+(1, 2, 3, 4, 5, 6)
+>>> [1, 2, 3] + [4, 5, 6]
+[1, 2, 3, 4, 5, 6]
+>>> "Hello" + " " + "World"
+'Hello World'
+</code></pre>
+</div>
+<div style="float:left; width: 400px;">
+<pre><code style="max-height: 1000px; " class="python"># The * Operator produces a new tuple, list, or string that "repeats" the original content
+>>> (1, 2, 3) * 3
+(1, 2, 3, 1, 2, 3, 1, 2, 3)
+>>> [1, 2, 3] * 3
+[1, 2, 3, 1, 2, 3, 1, 2, 3]
+>>> “Hello” * 3
+'HelloHelloHello'
+</code></pre>
+</div>
+</section>
+
+<section>
+<h3>Секвенци</h3>
+<pre><code class="python"># Tuples: Immutable
+>>> t = (23, 'abc', 4.56, (2,3), 'def')
+>>> t[2] = 3.14</code></pre>
+<pre><code class="python">Traceback (most recent call last):
+File "<pyshell#75>", line 1, in -toplevel-
+tu[2] = 3.14
+TypeError: object doesn't support item assignment
+</code></pre>
+<pre><code class="python"># You can't change a tuple.
+# You can make a fresh tuple and assign its reference to a previously
+# used name
+>>> t = (23, 'abc', 3.14, (2,3), 'def')
+</code></pre>
+<pre><code class="python"># Lists: Mutable
+# We can change lists in place
+# Name li still points to the same memory reference when we're done
+# The mutability of lists means that they aren't as fast as tuples
+>>> li = ['abc', 23, 4.34, 23]
+>>> li[1] = 45
+>>> li
+['abc', 45, 4.34, 23]
+</code></pre>
+</section>
+
+<section>
+<h3>Примери за работа со листи</h3>
+<pre><code style="max-height: 1000px" class="python">>>> li = [1, 11, 3, 4, 5]
+>>> li.append('a') 	# Our first exposure to method syntax
+>>> li
+[1, 11, 3, 4, 5, 'a']
+>>> li.insert(2, 'i')
+>>>li
+[1, 11, 'i', 3, 4, 5, 'a']
+
+>>> li = ['a', 'b', 'c', 'b']
+>>> li.index('b') 	# index of first occurrence
+1 
+>>> li.count('b') 	# number of occurrences
+2 
+>>> li.remove('b') 
+>>> li 
+['a', 'c', 'b'] 
+
+>>> li = [5, 2, 6, 8]
+>>> li.reverse() 	# reverse the list *in place*
+>>> li 
+[8, 6, 2, 5] 
+>>> li.sort() 		# sort the list *in place*
+>>> li 
+[2, 5, 6, 8] 
+>>> li.sort(func) 	# sort in place using user-defined comparison
+</code></pre>
+</section>
+
+<section>
+<h3>Tuples vs. Lists</h3>
+<ul>
+<li>Листите се побавни, но помоќни од tuples</li>
+<li>Листите може да се модифицираат</li>
+<li>Tuples се immutable и имаат многу помалку функционалности</li>
+<li>За конверзија меѓу tuples и листи се користат функциите <strong>list()</strong> и <strong>tuple()</strong>:
+<pre><code class="python">li = list(tu)
+tu = tuple(li)</code></pre>
+</li>
+</ul>
+</section>
+
+<section style="width: 15000px;">
+<h3>Мапи - Dictionary</h3>
+<table>
+<tr><td>
+<pre><code class="python">>>> d = {'user':'bozo', 'pswd':123}
+>>> d['user']
+'bozo'
+>>> d['pswd']
+123
+>>> d['bozo']
+</code></pre>
+<pre><code>Traceback (innermost last):
+File '&ltinteractive input&gt' line 1, in ?
+KeyError: bozo</code></pre>
+</td>
+<td>
+
+<pre><code class="python" style="max-height:600px;width: 500px;">>>> d = {'user':'bozo', 'pswd':1234}
+>>> d['user'] = 'clown'
+>>> d
+{'user':'clown', 'pswd':1234}
+>>> d['id'] = 45
+>>> d
+{'user':'clown', 'id':45, 'pswd':1234}
+>>> d = {'user':'bozo', 'p':1234, 'i':34}
+>>> del d['user'] # Remove one.
+>>> d
+{'p':1234, 'i':34}
+>>> d.clear() 	# Remove all.
+>>> d
+{}
+>>> d = {'user':'bozo', 'p':1234, 'i':34}
+>>> d.keys() 	# List of keys.
+['user', 'p', 'i']
+>>> d.values() 	# List of values.
+['bozo', 1234, 34]
+>>> d.items() 	# List of item tuples.
+[('user','bozo'), ('p',1234), ('i',34)]
+</code></pre>
+</td></tr></table>
+</section>
+
+<section style="text-align:left">
+<h3>Функции</h3>
+<ul><li>
+Дефинирање на функција со <strong>def</strong>
+<pre><code class="python">def times(x, y):
+  return x * y
+</code></pre>
+</li>
+<li>Опционални аргументи
+<pre><code class="python">def func(a, b, c = 10, d = 100):
+  print a, b, c, d
+>>> func(1, 2)
+1 2 10 100
+>>> func(1, 2, 3, 4)
+1 2 3 4
+</code></pre>
+</section>
+
+<section style="text-align:left">
+<h3>Функции</h3>
+<li>Сите функции враќаат вредност</li>
+<li>Дури и кога <strong>return</strong> не е експлицитно искористена</li>
+<li>Функциите без <strong>return</strong> директива ја враќаат специјалната вресност <strong>None</strong></li>
+<li>Не постои <strong>overloading</strong> на функции</li>
+<li>Две различни функции не може да имаат исто име дури и ако листата на аргументи е различна</li>
+<li>Функциите може да се користат како било која друга променлива (функции од повисок тип).</li>
+<li>Можат да бидат: аргументи на друга функција, return вредност на функција, можат да се доделуваат на променливи, може да се елементи на листи итн.
+</li></ul>
+</section>
+
+
+<section>
+<h3>Структурата if/elif/else</h3>
+<ul style="width:800px"><li>Слична како во други програмски јазици
+<pre><code class="python">person = 'Luke'
+if person == 'Per':
+    status = 'Pythonist'
+elif person == 'Luke':
+    status = 'Jedi knight'
+else:
+    status = 'unknown'
+print person, status
+</code></pre>
+</li></ul>
+</section>
+
+<section>
+<h3>Структурата for</h3>
+<ul><li>Во python for е слична на for each во други програмски јазици
+<pre><code class="python">s = 0
+# walk through list, assign to i
+for i in [0, 1, 2, 3, 4, 5, 6, 7, 8]:
+    s = s + i
+    if s > 10:
+        break	# quit 'for' loop, jump to after it
+
+print "i=%i, s=%i" % (i, s)
+</code></pre>
+
+<pre><code class="python">r = []
+# walks through string, char by char
+for c in 'this is a string with blanks':  
+    if c == ' ': continue	# skip rest of block, continue loop
+    r.append(c)
+
+print ''.join(r)
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h3>Структурата for</h3>
+<ul>
+<li>
+Со користење на функциите <strong>range</strong> и <strong>xrange</strong> станува слична на for структурата во C, Java итн.</li>
+<li>Функцијата <strong>range</strong> креира листа што може да биде доста неефикасно во поглед на меморија
+<pre><code class="python">>>> range(9)			# start=0, step=1 by default
+[0, 1, 2, 3, 4, 5, 6, 7, 8]
+>>> range(1, 12, 3)		# explicit start, end, step
+[1, 4, 7, 10]
+>>> range(10**9)		# MemoryError!
+</code></pre>
+</li>
+<li>
+Функцијата <strong>xrange</strong> креира итератор што е многу мемориски поефикасно од користење на range
+<pre><code class="python">s = 0
+for i in xrange(100000):
+    if i % 19 == 0:	# remainder: evenly divisible with 19?
+        s = s + i
+print s
+</code></pre>
+</li></ul>
+</section>
+
+<section>
+<h3>Структурата while</h3>
+<ul style="width:800px;">
+<li>
+Слична како во C или Java
+<pre><code class="python">#!/usr/bin/env python
+def fib(n): # return Fibonacci series up to n
+  """Return a list containing the Fibonacci series up to n."""
+  result = []
+  a, b = 0, 1
+  while a < n:
+   result.append(a)
+   a, b = b, a+b
+  return result
+print fib(100)	# [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+</code></pre>
+</li></ul>
+</section>
+
+<section>
+<h3>Работа со String-ови</h3>
+<pre><code style="max-height:1000px;" class="python">>>> s = 'a string, with stuff'
+>>> s.count('st')                  # how many substrings?
+2
+>>> s.find('stu')                  # give location of substring, if any
+15
+>>> three = '3'
+>>> three.isdigit()                # only digit characters in string?
+True
+>>> supper = s.upper()             # convert to upper case
+>>> supper
+'A STRING, WITH STUFF'
+>>> s.rjust(30)                    # right justify by adding blanks
+'          a string, with stuff'
+>>> "newlines\n\n\n".strip()       # a string literal also has methods!
+'newlines'
+>>> s.replace('stuff', 'characters') # replace substring (all occurrences)
+'a string, with characters'
+>>> s.replace('s', 'X', 1)         # replace only once
+'a Xtring, with stuff'
+</code></pre>
+</section>
+
+<section>
+<h3>Работа со String-ови</h3>
+<pre><code style="max-height:1000px; width:980px; font-size:18px;" class="python"># Returns index of string2 string in referenced string1.
+'string1'.find('string2') 
+# Returns string value of list1 but with string1 in between words.
+'string1'.join(list1) 
+# Returns completely lower/upper case version of string1.
+'string1'.lower/upper() 
+# Returns one string with whitespace removed.
+'string1'.strip() 
+# Returns list with string2 removed from string1. If string2 is not specified, white space is assumed.
+'string1'.split(['string2']) 
+# Returns string with all first letters capitalized.
+'string1'.title() 
+# returns string1 but with all instances of string2 replaced with string 3.
+'string1'.replace('string2','string3') 
+# Returns the number of times that string2 appears in string1.
+'string1'.count('string2') 
+# Returns True or False value if string1 ends with string2. Use 'string1'.startswith('string2') for the reverse.
+'string1'.endswith('string2')
+# Returns the number of times that string2 appears in string1. 
+'string1'.count('string2') 
+</code></pre>
+</section>
+
+<section>
+<h3>Стандарден Влез/Излез (std i/o)</h3>
+<ul>
+<li>
+За читање од стандарден влез се користат наредбите <strong>input</strong> и <strong>raw_input</strong></li>
+<ul><li>input го интерпретира влезот па враќа</li>
+<li>raw_input го враќа точниот string како што е внесен</li>
+</ul>
+<li>Функцијата <strong>print</strong> печати на стандарден излез
+exactly as typed, data not in quotes is interpreted first</li>
+<li>
+<pre><code class="python">>>> x = input('enter a number: ')
+enter a number: 3+4
+>>> x
+7
+>>> x,y = input('enter two number: ')
+enter two number: 3+4, 2*2
+>>> x,y
+(7,4)
+>>>x,y = raw_input('enter two numbers: ')
+enter two numbers: 3+4, 2*2
+>>> x,y
+('3+4', '2*2')
+>>> c = 4
+>>> print 'a', 1+2, c, "c"
+a 3 4 c
+</code></pre>
+</section>
+
+<section style="text-align:left">
+<h3>Пристап до аргументи</h3>
+<ul>
+<li>Преку модулот sys</li></ul>
+<pre><code class="python" style="width: 900px">#!/usr/bin/python
+import re
+import sys
+if len(sys.argv) != 3:
+  sys.exit('Error: This script requires two arguments!')
+infile = file(sys.argv[1], 'r')
+lines = infile.readlines()
+count=0
+for k in lines:
+  if re.search(sys.argv[2], k):
+    count=count+1
+print 'The regular express', sys.argv[2], \ 
+'was found', count, 'times in the file', sys.argv[1]
+</code></pre>
+</section>
+
+
+<section>
+<h3>Работа со датотеки</h3>
+<ul>
+<li><strong>filevar.read()</strong> - ја чита целата датотека</li>
+<li><strong>filevar.readline()</strong> - чита една линија од датотеката</li>
+<li><strong>filevar.readlines()</strong> - ја чита целата датотека како низа од string-ови, по еден string за секоја линија</li>
+<li><strong>filevar.seek(offset,from what)</strong> seek offset bytes from either
+beginning (0), current position (1) or end of file (2). If you
+don't have a from what it seeks from the beginning of the file</li>
+</ul>
+</section>
+
+<section>
+<h3>Работа со датотеки</h3>
+<pre><code class="python">#!/usr/bin/python
+infile=file('Text.txt','r')
+for i in range(5):
+  line = infile.readline()
+print line[:-1] # Remove Newlines
+
+# To write we just use the mode 'w'.
+outfile = file('output.txt','w')
+count=1
+outfile.write('This is the first line of text\n')
+count = count + 1
+outfile.write('This is line number %d' % (count))
+outfile.close()
+</code></pre>
+<pre><code class="python">#!/usr/bin/python
+infile=file('input.txt','r')
+outfile=file('out.txt','w')
+linelist=infile.readlines()
+# Writes to out.txt every 10th line of input.txt
+for i in range(1,len(linelist),10):
+  outfile.write(linelist[i])
+</code></pre>
+</section>
+
+<section>
+<h3>Пример 1</h3>
+<ul><li>
+Да се испечати содржината на датотеките дадени како аргументи на скриптата
+</li></ul>
+
+<pre><code class="python">#!/usr/bin/python
+# Print the contents of the files listed on the command line.
+import sys
+for fn in sys.argv[1:]:
+    fin = open(fn, 'r')
+    print "\n*** Contents of", fn, "***"
+    # Print the file, with line numbers.
+    lno = 1
+    while 1:
+        line = fin.readline()
+        if not line: break;
+        print '%3d: %-s' % (lno, line[:-1])
+        lno = lno + 1
+    fin.close()
+print
+</code></pre>
+</section>
+
+<section style="text-align:left">
+<h3>Пример 2</h3>
+<ul><li>
+Некои од функциите во модулот sys
+</li></ul>
+<pre><code class="python">#!/usr/bin/python
+# Various stuff from the sys module.
+import sys, os, glob
+print "sys.argv:", sys.argv
+print "os.environ:"
+for v in os.environ.keys():
+    print "    %-15s => %s" % (v, os.environ[v])
+print "sys.platform:", sys.platform
+print "os.getcwd:", os.getcwd()
+print "os.listdir('.'):", os.listdir('.')
+print "glob.glob('*.py'):", glob.glob('*.py')
+print "sys:", dir(sys)
+print "os:", dir(os)
+print
+os.system('ls -l')
+</code></pre>
+</section>
+
+<section style="text-align:left">
+<h3>Пример 3</h3>
+<ul><li>
+Да се излистаат сите .gif датотеки од тековниот директориум
+</li></ul>
+<pre><code class="python">#!/usr/bin/python
+# Use the standard find method to look for GIF files.
+import sys, find
+if len(sys.argv) > 1:
+    dirs = sys.argv[1:]
+else:
+    dirs = [ '.' ]
+for dir in dirs:
+    files = find.find('*.gif', dir)
+    if files:
+        print "For", dir + ':'
+        for fn in files:
+            print " ", fn
+    else:
+        print "For", dir + ': None'
+</code></pre>
+</section>
+
+<section style="text-align:left">
+<h3>Пример 4</h3>
+<pre><code class="python" style="font-size:14px;line-height:14px;">#!/usr/bin/python
+# List the account and human names for each person who's logged on.
+# The information is taken from the password file, which is
+# read and loaded first.  The command line argument (if given) is
+# used in place of /etc/passwd.
+from sys import argv
+from string import *
+import os
+# Dictionary of entries.
+iddict = { }
+# Get the file name.  Note that argv[0] contains the name of the script,
+# so we're getting argv[1], if there is one.
+infile = '/etc/passwd'
+if len(argv) > 1:
+    infile = argv[1]
+# Attempt to open the file.  Will just let the program die on the exception
+# if the open fails.
+fin = open(infile, 'r')
+# Read the password file and load the information.
+for line in fin.readlines():
+    # Lines starting with # are comments.  Clean leading spaces, and
+    # skip comments.
+    line = lstrip(line)
+    if line == '' or line[0] == '#':
+        continue
+    # Split the line by the : delimeter, extract the appropriate fields,
+    # and get rid of any leading or trailing blanks.
+    parts = split(line, ':')
+    userid = strip(parts[0])
+    name = strip(parts[4])
+    # Trim the contents of the name following the first comma, if any.
+    compos = find(name, ',')
+    if compos != -1:
+        name = name[0:compos]
+    # If there is no human name, or if equals the login name, say [ none ]
+    if name == '' or name == userid:
+        name = '[ none ]'
+    # Enter into the dictionary list.
+    iddict[userid] = name
+# Run who to see who is on, and print those users.  When printed, take
+# them out of the list so each user printed only once.
+for line in os.popen('who').readlines():
+    user = split(line)[0]
+    if iddict.has_key(user):
+        print '%-14s %s' % (user + ':', iddict[user])
+        del iddict[user]
+</code></pre>
+</section>
+
+<section style="text-align:left">
+<h3>Пример 5</h3>
+<ol><li>
+Напишете Python скрипта која врши конверзија од CSV (comma seperated values) датотека со колони Make,Insurance Class, Premium ($),Age (years) во TSV (tab separated values) датотека која ги содржи само колоните Make Premium($) Insurance_Class.</li>
+<li>
+Напишете Python скрипта која печати ги печати просекот за колоната Premium($), моделот на најстариот автомобил во листата и моделите со најголема и најмала класа на осигурување.
+</li></ol>
+
+Влез:
+<pre>
+Make,Insurance Class,Premium ($),Age (years)
+Ferrari,10,2432.50,3
+BMW,8,1231.10,1
+VW,6,862.20,4
+Fiat,4,591.10,2
+Bugatti,15,4312.00,1
+</pre>
+</section>
+
+<section style="text-align:left">
+<h3>Пример 5.1</h3>
+<div style="font-family:monospace">
+Влез:
+<pre>
+Make,Insurance Class,Premium ($),Age (years)
+Ferrari,10,2432.50,3
+BMW,8,1231.10,1
+VW,6,862.20,4
+Fiat,4,591.10,2
+Bugatti,15,4312.00,1
+</pre>
+</div>
+<br/>
+<pre><code class="python">#!/usr/bin/env python
+import sys
+lines = open( sys.argv[1], "r" ).readlines()
+# print our own header
+print "Make   Premium($)   Insurance_class"
+# skip the header line (start at 1 rather than 0)
+for i in range( 1, len(lines) ):
+    line = lines[i].rstrip()
+    words = line.split(",")
+    if len(words) >= 4:
+        print "%s  %s  %s" % (words[0], words[2], words[3])
+</code></pre>
+</section>
+
+<section style="text-align:left">
+<h3>Пример 5.2</h3>
+<pre><code class="python" style="font-size:18px;line-height:20px;">#!/usr/bin/env python
+import sys
+lines = open( sys.argv[1], "r" ).readlines()
+total_premium = 0
+nmakes = 0
+oldest_age = 0
+highest_class = 0
+lowest_class = 1000
+for i in range( 1, len(lines) ):
+    line = lines[i].rstrip()
+    words = line.split(",")
+    if len(words) >= 4:
+        make = words[0]
+        car_class = int( words[1] )
+        premium = float( words[2] )
+        age = words[3]
+        nmakes += 1
+        total_premium += premium
+        if age > oldest_age:
+            oldest_make = make
+            oldest_age = age
+        if car_class > highest_class:
+            highest_make = make
+            highest_class = car_class
+        if car_class < lowest_class:
+            lowest_make = make
+            lowest_class = car_class
+avg_premium = total_premium / nmakes
+print "The average premium is $%f." % avg_premium
+print "The oldest make is %s." % oldest_make
+print "The make in the lowest class is %s." % lowest_make
+print "The make in the highest class is %s." % highest_make
+</code></pre>
+</section>
+
+<section style="text-align:left">
+<h3>Пример 6</h3>
+<ul>
+<li>
+convert е UNIX програма која врши конверзија од еден во друг формат на слики (на пример конверзија помеѓу JPEG и PNG слики). Напишете Python скрипта што ги конвертира сите JPEG датотеки во даден директориум во PNG датотеки. 
+</li>
+<li>
+Наредбата convert функционира на следниот начин:
+<br/><br/>
+<pre>
+convert file.jpg file.png
+</pre>
+</li>
+<ul>
+</section>
+
+<section style="text-align:left">
+<h3>Пример 6</h3>
+<pre><code class="python">#!/usr/bin/env python
+import sys
+import os
+import re
+
+directory = sys.argv[1]
+
+jpeg_files = os.popen( "ls %s" % directory, "r" ).readlines()
+
+for jpeg_file in jpeg_files:
+    jpeg_file = jpeg_file.rstrip()
+
+    png_file = re.sub( r"jpg$", "png", jpeg_file )
+
+    command = "convert %s %s" % (jpeg_file, png_file)
+
+    print "Running '%s'..." % command
+
+    os.system( command )
+</code></pre>
+<ul>
+</section>
+
+<section style="text-align:left">
+<h3>Пример 7</h3>
+<ul><li>
+Напишете python скрипта што се однесува како UNIX наредбата <strong>grep</strong> (потребна е едноставна имплементација без опциите кои ги има во grep).
+</li>
+<li>
+Пример: <br/><br/><pre>$./grep the file.txt</pre> 
+<br/>треба да ги испечати сите линии во кои се појавува зборот "the". Дополнително програмата треба да ги обележи најдените зборови со ** пред и по најдениот збор.
+</li>
+</ul>
+</section>
+
+<section style="text-align:left">
+<h3>Пример 7</h3>
+<pre><code class="python">#!/usr/bin/env python
+import sys
+import re
+
+search_string = sys.argv[1]
+
+replace_string = "**%s**" % ( search_string.upper() )
+
+lines = open( sys.argv[2], "r" ).readlines()
+
+for line in lines:
+    print re.sub( search_string, replace_string, line )
+</code></pre>
+</section>
+
+
+<section style="text-align:left">
+<h3>Пример 8</h3>
+<ul><li><strong>head</strong> и <strong>tail</strong> се две многу корисни UNIX програми кои се користат за печатење на првите односно последните линии од дадена датотека (на пример многу се корисни кога набљудувате многу големи датотеки кои содржат логови од веб сервер на пример). Напишете Python скрипта што функционира на истиот начин.
+</li>
+<li>
+Ги печати првите пет линии од дадената датотека.
+<pre>$./head.py 5 filename</pre>
+</li>
+
+<li>
+Ги печати последните десет линии од дадената датотека.
+<pre>$./tail.py 10 filename</pre>
+</li>
+<li>Дополнително, напишете скрипта за <strong>body</strong> наредба, која ги печати линиите на средина од дадената датотека. На пример:
+<pre>$./body.py 20 25 filename</pre>
+Ги печати последните од 20 до 25 од дадената датотека.
+</li>
+</ul>
+</section>
+
+
+
+<section style="text-align:left">
+<h3>Пример 8: head</h3>
+<pre><code class="python">#!/usr/bin/env python
+import sys
+
+n = int( sys.argv[1] )
+
+filename = sys.argv[2]
+
+lines = open( filename, "r" ).readlines()
+
+nlines = len( lines )
+
+if n > nlines:
+    n = nlines
+
+for i in range(0, n):
+    print lines[i],
+</code></pre>
+<ul>
+</section>
+
+<section style="text-align:left">
+<h3>Пример 8: tail</h3>
+<pre><code class="python">#!/usr/bin/env python
+import sys
+
+n = int( sys.argv[1] )
+
+lines = open( sys.argv[2], "r" ).readlines()
+
+nlines = len(lines)
+
+if n > nlines:
+    n = nlines
+
+for i in range(nlines - n, nlines):
+    print lines[i],
+</code></pre>
+<ul>
+</section>
+
+<section style="text-align:left">
+<h3>Пример 8: body</h3>
+<pre><code class="python">#!/usr/bin/env python
+import sys
+
+start = int( sys.argv[1] )
+end = int( sys.argv[2] )
+
+lines = open( sys.argv[3], "r" ).readlines()
+
+nlines = len(lines)
+
+if start < 0:
+    start = 0
+
+if end >= nlines:
+    end = nlines-1
+
+for i in range(start, end+1):
+    print lines[i],
+</code></pre>
+<ul>
+</section>
+
+
+<section style="text-align:left; font-size:28px;">
+<h3>Пример 9 - e-book reader</h3>
+Напишете python скрипта <strong>reader.py</strong> која претставува рудиментиран читач на е-книги - "plain-text eBook reader".
+Идејата е следна: Корисникот на стартува програмата, чита дел од книгата и ја затвара. Следниот пак кога корисникот ќе ја стартува истата програма, тој треба да продолжи од истото место каде што застанал минатиот пат.
+<br/><br/>
+Скриптата секогаш има еден задолжителен аргумент, називот на датотеката која треба да се отвори. Исто така програмата има еден не задолжителен аргумент означен со flag-oт <strong>-n</strong> со кој се задава колку линии да се прикажат одеднаш (по страна), со default вредност 40 доколку аргументот не е зададен. За навигација на страни се поддржуваат само три операции: следна страна (со избор на <strong>n</strong>), претходна страна (со избор на <strong>p</strong>) и излез (со избор на <strong>q</strong>).
+</section>
+
+<section style="text-align:left; font-size:28px;">
+<h3>Пример 9 - e-book reader</h3>
+Следуваат некои идеи за имплементацијата на скриптата:
+<ul>
+<li>
+При стартување на скрипата, провери дали home директориумот на корисникот содржи датотека <strong>~/.reader_rc</strong>. Доколку не постои датотеката, тогаш креирај ја. Тука ќе го чуваме бројот на страна до каде застанал корисникот кога ја затворил програмата за сите датотеки кои биле некогаш отворени со нашиот читач.
+</li>
+<li>
+Датотеката <strong>.reader_rc</strong> ќе биде CSV датотека со две колони <strong>file_content_hash, line_count</strong>, каде <strong>file_content_hash</strong> е hash (на пример MD5 ili SHA1) од целата содржина на датотеката која се чита (е-книгата), а <strong>line_count</strong> е линијата до каде стигнал корисникот при затварање на програмата. Предоста на чување на hash од содржината на датотеката (наместо име на датотека) е што нашата програма ќе работи доколку содржината на датотеката се менува, самата датотека се преименува или се премести. Тоа значи дека нашата скрипта зависи од содржината на датотеката, а не од нејзиното име или локација.
+Еве еден пример за датотеката <strong>.reader_rc</strong>:
+<pre style="margin-top:10px;width: 350px;">
+3e3ac0b27b0adeb9138206eea2c43bb2,120
+5eb63bbbe01eeed093cb22bb8f5acdc3,0
+98f84fd484f8c2273f28cc645935f650,40
+</pre>
+</li>
+</ul>
+</section>
+
+<section style="text-align:left; font-size:28px;">
+<h3>Пример 9 - e-book reader</h3>
+<ul>
+<li>
+Кога се стартува програмата, се отвара датотеката со даденото име како прв аргумент, се пресметува hash вредноста на содржината на датотеката со користење на MD5 hash, се чита датотеката ~/.reader_rc и се позиционира на соодветната линија за дадениот hash. Потоа се прикажува бројот на линии зададен со аргументот -n, а доколку не е даден аргументот -n  се прикажуваат 40 линии.
+</li>
+<li>
+Со избор на копчињата <strong>n/p</strong>, скриптата ќе го ажурира податокот за прочитани линии во ~./reader_rc датотеката и ќе ја испечати претходната/следната страна од книгата.
+</li>
+<li>
+Со избор на копчето <strong>q</strong> програмата излегува.
+</li>
+</ul>
+</section>
+
+<section>
+<pre><code class="python" style="font-size:14px;line-height:14px;">#!/usr/bin/python
+import sys
+import os
+import hashlib
+def readBook(commands):
+    readerFile = os.getenv("HOME")+"/.reader_rc"
+    pageSize = 40
+    # Take input
+    if len(commands) == 2:
+        fileName = commands[1]
+    elif len(commands) == 4:
+        if commands[1] == "-n":
+            pageSize = int(commands[2])
+            fileName = commands[3]
+        else:
+            print "Format command as 'filename' or '-n pages filename'"
+            return
+    else:
+        print "Format command as 'filename' or '-n pages filename'"
+        return
+    book = open(fileName, 'r')
+    allLines = []
+    md5OfBook = hashlib.md5()
+    for line in book:
+        allLines.append(line)
+        md5OfBook.update(line)
+    book.close()
+    hashOfBook = str(md5OfBook.hexdigest())
+    if os.path.exists(readerFile):
+        reader = open(readerFile, 'r+')
+    else:
+        reader = open(readerFile, 'w+')
+    allBooks = reader.readlines()
+    reader.close() # Finish with .reader_rc
+
+    lineNumber = -1
+    bookIdx = -1
+    for i in range(len(allBooks)):
+        b = allBooks[i]
+        [hashVal, count] = b.split(",")
+        if hashVal == str(hashOfBook):
+            lineNumber = int(count)
+            bookIdx = i
+    if bookIdx == -1:
+        allBooks.append(hashOfBook+","+"0"+"\n")
+        bookIdx = len(allBooks) - 1
+        lineNumber = 0
+</code></pre>
+</section>
+
+<section>
+<pre><code class="python" style="font-size:14px;line-height:14px;">while True:
+        os.system("clear")
+        for i in range(lineNumber, lineNumber+pageSize):
+            if i < len(allLines):
+                print allLines[i],
+            else:
+                break
+        key = ""
+        while key != "n" and key != "p" and key != "q":
+            key = raw_input()
+            if key != "n" and key != "p" and key != "q":
+                print "Valid commands are next (n), previous(p) and quit (q)"
+            if key == "n":
+                os.system("clear")
+                lineNumber += pageSize
+                updateReader(lineNumber, bookIdx, hashOfBook, allBooks, readerFile)
+            elif key == "p":
+                os.system("clear")
+                lineNumber -= pageSize
+                if lineNumber < 0:
+                    lineNumber = 0
+            elif key == "q":
+                os.system("clear")
+                updateReader(lineNumber, bookIdx, hashOfBook, allBooks, readerFile)
+                print "Thanks for using the reader!"
+                return
+def updateReader(lineNumber, bookIdx, hashOfBook, allBooks, readerFile):
+    allBooks[bookIdx] = hashOfBook+","+str(lineNumber)+"\n"
+    reader = open(readerFile, "w")
+    for b in allBooks:
+        reader.write(b)
+    reader.close()
+# Run script
+readBook(sys.argv)
+</code></pre>
+</section>
+
+
+
+<section style="text-align:left">
+<h3>Прашања ?</h3>
+</section>
+
+
+</div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
+
+<script>
+
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+    rollingLinks: false,
+    theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+    transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
+
+    // Optional libraries used to extend on reveal.js
+    dependencies: [
+    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+    { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+    // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+    // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+    ]
+    });
+
+
+</script>
+
+</body>
+</html>

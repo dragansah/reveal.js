@@ -1,0 +1,79 @@
+@font-face {
+	font-family: 'StobiSans';
+	src: url('stobisans-regular-webfont.eot');
+	src: url('stobisans-regular-webfont.eot?iefix') format('eot'),
+		url('stobisans-regular-webfont.woff') format('woff'),
+		url('stobisans-regular-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'StobiSans';
+	src: url('stobisansit-regular-webfont.eot');
+	src: url('stobisansit-regular-webfont.eot?iefix') format('eot'),
+		url('stobisansit-regular-webfont.woff') format('woff'),
+		url('stobisansit-regular-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'StobiSans';
+	src: url('stobisans-bold-webfont.eot');
+	src: url('stobisans-bold-webfont.eot?iefix') format('eot'),
+		url('stobisans-bold-webfont.woff') format('woff'),
+		url('stobisans-bold-webfont.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'StobiSans';
+	src: url('stobisansit-bold-webfont.eot');
+	src: url('stobisansit-bold-webfont.eot?iefix') format('eot'),
+		url('stobisansit-bold-webfont.woff') format('woff'),
+		url('stobisansit-bold-webfont.ttf') format('truetype');
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'StobiSerif';
+	src: url('stobiserif-bold-webfont.eot');
+	src: url('stobiserif-bold-webfont.eot?iefix') format('eot'),
+		url('stobiserif-bold-webfont.woff') format('woff'),
+		url('stobiserif-bold-webfont.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'StobiSerif';
+	src: url('stobiserif-regular-webfont.eot');
+	src: url('stobiserif-regular-webfont.eot?iefix') format('eot'),
+		url('stobiserif-regular-webfont.woff') format('woff'),
+		url('stobiserif-regular-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'StobiSerif';
+	src: url('stobiserifit-bold-webfont.eot');
+	src: url('stobiserifit-bold-webfont.eot?iefix') format('eot'),
+		url('stobiserifit-bold-webfont.woff') format('woff'),
+		url('stobiserifit-bold-webfont.ttf') format('truetype');
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'StobiSerif';
+	src: url('stobiserifit-regular-webfont.eot');
+	src: url('stobiserifit-regular-webfont.eot?iefix') format('eot'),
+		url('stobiserifit-regular-webfont.woff') format('woff'),
+		url('stobiserifit-regular-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: italic;
+}

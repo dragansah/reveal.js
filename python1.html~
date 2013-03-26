@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+
+        <title>Python - Командни процедури во UNIX</title>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+        <link rel="stylesheet" href="plugin/presentable/presentable.css"/>
+        <link rel="stylesheet" href="css/reveal.css"/>
+        <link rel="stylesheet" href="css/theme/simple.css" id="theme"/>
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css"/>
+        <link rel="stylesheet" href="fonts/stobi.css"/>
+        <style type="text/css">
+            .reveal { font-family: StobiSans; } 
+            .reveal h1, .reveal h2, .reveal h3, .reveal h4 { 
+            font-family: StobiSerif; 
+            text-align: left;
+#            text-decoration: underline;
+            font-weight: bold;
+            }
+            .reveal h1 { text-align: center; }
+            .reveal li { padding: 5px 0px; }
+        </style>
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write('<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print" />' );
+        </script>
+
+        <!--[if lt IE 9]>
+            <script src="lib/js/html5shiv.js">
+                /        </script>
+            <![endif]-->
+    </head>
+
+    <body>
+        
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+
+                <section>
+                    <h1>Python</h1>
+                    <br/>
+                    <h3>Командни процедури во UNIX</h3>
+                </section>
+
+                <section>
+                    <h2>Содржина</h2>
+                    <nav id="presentable-toc" class="revealjs"></nav>
+                </section>
+
+                <section>
+                    <h3>Вовед во python</h3>
+                    <ul>
+                        <li>Open source general-purpose јазик.</li>
+                        <ul><li>Објектно Ориентиран, Императивен, Функционален</li></ul>
+                        <li>Лесен за интеграција со C/ObjC/Java/Fortran</li>
+                        <li>Downloads: <a href="http://www.python.org">
+                                http://www.python.org</a>
+                        </li>
+                        <li>Документација: 
+                            <a href="http://www.python.org/doc/">
+                                http://www.python.org/doc/</a></li>
+                        <li>Бесплатна книга: 
+                            <a href="http://www.diveintopython.org">
+                                http://www.diveintopython.org</a></li>
+                        <li>Преинсталиран на Mac OS X и Linux</li>
+                        <li>Windows downloads: <a href="http://www.python.org">
+                                http://www.python.org</a> </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Python интерпретер</h3>
+                    <ul>
+                        <li>
+                            Интерактивен интерфејс кон Python</li>
+                        <li>REPL (Read Eval Print Loop)</li>
+                        <li>
+                            <pre><code contenteditable class="bash">~$ python
+Python 2.7.3 (default, Sep 26 2012, 21:51:14) 
+[GCC 4.7.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+</code></pre>
+</li>
+<li>
+    Внесениот израз се евалуира веднаш
+    <pre><code contenteditable class="python">>>>3*(7+2)
+27</code></pre>
+</li>
+
+<li>За излегување од REPL околината внесете: CTRL-D</li>
+</ul>
+</section>
+
+
+<section>
+	   <h3>Python скрипти во UNIX</h3>
+    <ol>
+        <li>Извршување на датотека преку внесување на python и името на датотеката:
+            <pre><code class="bash">~$ python filename.py</code></pre></li>
+        <li>Извршување како UNIX извршна датотека:
+            <ul><li>.py датеката треба да ја има соодветната пермисија за извршување 'x'</li>
+                <li>Датотеката треба да почнува со<pre><code>#!/usr/bin/env python</code></pre></li>
+                <li>Извршување како извршна датотека:
+                    <pre><code>~$ ./filename.py</code></pre>
+                </li>
+
+    </ol>
+    </ul>
+</section>
+
+<section>
+	   <h3>Hello world</h3>
+ <pre><code class="python">>>> print 'Hello world!'
+Hello world!</code></pre>
+
+ <pre><code class="python">>>> a = 'Hello world!'
+>>> print a
+Hello world!</code></pre>
+</section>
+
+<section>
+<h3>Едноставен пример</h3>
+<pre><code class="python">x = 34 - 23 			# Ова е коментар
+y, z = "Hello", 3.45		# Повеќекратко доделување на вредност
+if z == 3.45 or y == “Hello”: 	# if statement
+ x = x + 1
+ y = y + "World"		# Конкатенација на string-ови
+print x				# Печатење на std out
+print y</code></pre>
+
+<ul style="line-height:1.1em;">
+<li>За доделување се користи = додека за споредба ==
+<li>За броеви <strong>+ - * / %</strong> како во C или Java</li>
+<ul><li>За конкатенација на string-ови <strong>+</strong></li>
+<li>За форматирање на string-ови <strong>%</strong> (како printf во C)</li></ul>
+<li>Логичките оператори со зборовите <strong>and, or, not</strong></li>
+<li>Основната наредба за печатење е <strong>print</strong></li>
+<li>Не е потребна декларација на променливи</li>
+<ul><li>Типот на променливите не се декларира експлицитно</li>
+<li>Python сам го <strong>погодува</strong> типот на променливите</li></ul>
+</ul>
+
+</section>
+
+<section>
+	   <h3>Основни податочни типови</h3>
+    <ul>
+        <li>
+            <strong>Integer</strong> (default-ен тип за броеви)</li>
+        <li><pre><code class="python">z = 5 / 2 # Резултатот е 2, делење на integer-и</code></pre></li>
+        <li><strong>Float</strong>
+            <pre><code class="python">x = 3.456</code></pre>
+</li>
+        <li><strong>String</strong></li>
+        <ul>
+            <li>Се дефинираат со користење на "" или ''
+            <pre><code class="python">"abc" == 'abc'</code></pre></li>
+            <li>Се користат тројни наводници за дефинирање на string во повеќе линии или на string кој содржи &quot или '</li>
+            <li><pre><code class="python">"""a'
+b&quotc"""</code></pre>
+                </li>
+        </ul>
+</section>
+
+<section>
+	   <h3>Whitespace</h3>
+<ul><li>    
+Whitespace-ите има значење во Python, особено назабувањата и новите линии</li>
+    <li>Се користи нова линија за завршување на линија со код</li>
+    <li>Се користи <strong>\</strong> кога мора да се оди за започнување на нова наредба без нова линија</li>
+    <li>Наместо <strong>{ }</strong> за означување на блок со код се користи конзистентно назабување</li>
+    <li>Првата линија со помало назабување е надвор од тој блокот со код од претходната линија</li>
+    <li>Првата линија со поголемо назабуање од претходната започнува нов вгнезден блок</li>
+    <li>Често се користи <strong>:</strong> за започнување на нов блок (при декларирање на функциии класи)</li>
+</ul>
+</section>
+
+<section>
+	   <h3>Коментари</h3>
+<ul><li>  
+    Коментарите започнуват со <strong>#</strong></li>
+    <li>String-от кој се наоќа на првата линија после декларација на функција или класа е документација за соодветната функција или класа</li>
+<li>Се користи од debug-ери, IDE алатки итн.</li>
+    <li>Пример:
+<pre><code class="python">def my_function(x, y):
+  """This is the docstring. This
+  function does blah blah blah."""
+  # The code would go here...
+</code></pre>
+</li>
+</li></ul>
+</section>
+
+<section>
+	   <h3>Доделување</h3>
+<ul style="line-height: 1.1em"><li>  
+    Доделување на променлива во Python значи задавање на <strong>име</strong> на <strong>референца</strong> кон некој <strong>објект</strong>
+    <li>Доделувањето креира нови референци, не копира цели објекти
+    <li>Променливите во Python немаат типови, туку објектите имаат типови
+    <li>Python го одредува типот на референцата автоматски врз основа на објектот доделен на применливата
+    <li>Промелиците се декларираат имплицитно, првиот пат кога ќе се појават на левата страна на израз за доделување
+    <pre><code class="python">x = 3</code></pre>
+</li>
+    <li>Референците се уништуваат преку garbage collection откако не се веќе референцирани од некоја променлива
+</li></ul>
+</section>
+
+<section>
+	   <h3>Пристапување до непостоечки променливи</h3>
+    <ul><li>
+            Ако се пристапи до применлива која се уште не е правилно креирана, се добива грешка
+<pre><code class="python">>>> y
+Traceback (most recent call last):
+ File "<pyshell#16>", line 1, in -toplevel-
+  y
+NameError: name 'y' is not defined
+>>> y = 3
+>>> y
+3
+</code></pre>
+</li></ul>
+</section>
+
+<section>
+	   <h3>Повеќекратно доделување</h3>
+<ul><li>Повеќекратно доделување на повеќе променливи во иста кодна линија
+<pre><code class="python">>>> x, y = 2, 3
+>>> x
+2
+>>> y
+3
+</code></pre>
+</li></ul>
+</section>
+
+<section>
+	   <h3>Именување на променливи</h3>
+<ul>
+<li>Имињата на променливите се case sensitive и не може да почнуваат со број. Може да содржат букви, броеви и долни линии (underscore). Пример:
+<pre><code class="python">bob
+Bob
+_bob
+_2_bob_
+bob_2
+BoB
+</code></pre>
+</li>
+<li>Резервирани зборови:
+<pre><code class="python">and, assert, break, class, continue, def, del, 
+elif, else, except, exec, finally, for, from, 
+global, if, import, in, is, lambda, not, or, 
+pass, print, raise, return, try, while
+</code></pre></li>
+</ul>
+</section>
+
+<section>
+    <h3>Секвенци</h3>
+    <ol><li>Tuple</li>
+        <ul>
+            <li>Едноставна, подредена секвенца од елементи</li>
+            <li>Immutable</li>
+            <li>Елементите може да бидат од разни типови вклучувајќи и други колекции</li>
+        </ul>
+        <li>String</li>
+        <ul>
+            <li>Immutable</li>
+            <li>Концептуално слична на tuple</li>
+        </ul>
+        <li>List</li>
+        <ul><li>Mutable</li><li>Потредена секвенца од елементи од различни типови</li>
+    </ul></ol>
+</section>
+
+<section style="text-align:left">
+<h3>Секвенци</h3>
+<ul style="width: 600px;">
+<li>Tuples</li>
+<li>
+<pre><code class="python">>>> tu = (23, 'abc', 4.56, (2,3), 'def')</code></pre>
+</li>
+
+<li>Lists</li>
+<pre><code class="python">>>> li = ["abc", 34, 4.34, 23]</code></pre>
+<li>Strings</li>
+<li>
+<pre><code class="python">>>> st="Hello World"
+>>> st='Hello World'
+>>> st="""This is a multi-line
+that uses triple quotes."""
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h3>Секвенци</h3>
+<ul>
+<li>Пристапот до елементи е 0 based
+<pre><code class="python" style="width: 800px">>>> tu = (23, 'abc', 4.56, (2,3), 'def')
+>>> tu[1]	# Second item in the tuple.
+'abc'
+>>> li = ["abc", 34, 4.34, 23]
+>>> li[1]	# Second item in the list.
+34
+>>> st = "Hello World"
+>>> st[1]	# Second character in string.
+'e'
+</code></pre>
+</li>
+<li>Позитивни и негативни индекси</li>
+<pre><code class="python" style="width: 800px">>>> t = (23, 'abc', 4.56, (2,3), 'def')
+>>> t[1]	#Positive index: count from the left, starting with 0
+'abc'
+>>> t[-3]	#Negative lookup: count from right, starting with –1
+4.56
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h3>Секвенци</h3>
+<ul>
+<li>Slicing and Copying
+<pre><code style="max-height: 1000px; width: 800px" class="python">>>> t = (23, 'abc', 4.56, (2,3), 'def')
+# Return a copy of the container with a subset of the original
+# members. Start copying at the first index, and stop copying
+# before the second index.
+>>> t[1:4]
+('abc', 4.56, (2,3))
+>>> t[1:-1]	# We can also use negative indices when slicing.
+('abc', 4.56, (2,3))
+# Omit the first index to make a copy starting from the beginning
+# of the container.
+>>> t[:2]	
+(23, 'abc')
+# Omit the second index to make a copy starting at the first index
+# and going to the end of the container.
+>>> t[2:] 	
+(4.56, (2,3), 'def')
+# To make a copy of an entire sequence, you can use [:].
+>>> t[:]
+(23, 'abc', 4.56, (2,3), 'def')
+# Note the difference between these two lines for mutable sequences
+>>> list2 = list1
+# 2 names refer to 1 ref so changing one affects both
+>>> list2 = list1[:] # Two independent copies, two refs
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h3>Секвенци</h3>
+<div style="float:left; width: 500px;">
+<pre><code style="max-height: 1000px; " class="python"># The 'in' operator
+# Boolean test whether a value is inside a container:
+>>> t = [1, 2, 4, 5]
+>>> 3 in t
+False
+>>> 4 in t
+True
+>>> 4 not in t
+False
+# For strings, tests for substrings
+>>> a = 'abcde'
+>>> 'c' in a
+True
+>>> 'cd' in a
+True
+>>> 'ac' in a
+False
+# The '+' Operator produces a new tuple, list, or string whose value is the concatenation of its arguments
+>>> (1, 2, 3) + (4, 5, 6)
+(1, 2, 3, 4, 5, 6)
+>>> [1, 2, 3] + [4, 5, 6]
+[1, 2, 3, 4, 5, 6]
+>>> "Hello" + " " + "World"
+'Hello World'
+</code></pre>
+</div>
+<div style="float:left; width: 400px;">
+<pre><code style="max-height: 1000px; " class="python"># The * Operator produces a new tuple, list, or string that "repeats" the original content
+>>> (1, 2, 3) * 3
+(1, 2, 3, 1, 2, 3, 1, 2, 3)
+>>> [1, 2, 3] * 3
+[1, 2, 3, 1, 2, 3, 1, 2, 3]
+>>> “Hello” * 3
+'HelloHelloHello'
+</code></pre>
+</div>
+</section>
+
+<section>
+<h3>Секвенци</h3>
+<pre><code class="python"># Tuples: Immutable
+>>> t = (23, 'abc', 4.56, (2,3), 'def')
+>>> t[2] = 3.14</code></pre>
+<pre><code class="python">Traceback (most recent call last):
+File "<pyshell#75>", line 1, in -toplevel-
+tu[2] = 3.14
+TypeError: object doesn't support item assignment
+</code></pre>
+<pre><code class="python"># You can't change a tuple.
+# You can make a fresh tuple and assign its reference to a previously
+# used name
+>>> t = (23, 'abc', 3.14, (2,3), 'def')
+</code></pre>
+<pre><code class="python"># Lists: Mutable
+# We can change lists in place
+# Name li still points to the same memory reference when we're done
+# The mutability of lists means that they aren't as fast as tuples
+>>> li = ['abc', 23, 4.34, 23]
+>>> li[1] = 45
+>>> li
+['abc', 45, 4.34, 23]
+</code></pre>
+</section>
+
+<section>
+<h3>Примери за работа со листи</h3>
+<pre><code style="max-height: 1000px" class="python">>>> li = [1, 11, 3, 4, 5]
+>>> li.append('a') 	# Our first exposure to method syntax
+>>> li
+[1, 11, 3, 4, 5, 'a']
+>>> li.insert(2, 'i')
+>>>li
+[1, 11, 'i', 3, 4, 5, 'a']
+
+>>> li = ['a', 'b', 'c', 'b']
+>>> li.index('b') 	# index of first occurrence
+1 
+>>> li.count('b') 	# number of occurrences
+2 
+>>> li.remove('b') 
+>>> li 
+['a', 'c', 'b'] 
+
+>>> li = [5, 2, 6, 8]
+>>> li.reverse() 	# reverse the list *in place*
+>>> li 
+[8, 6, 2, 5] 
+>>> li.sort() 		# sort the list *in place*
+>>> li 
+[2, 5, 6, 8] 
+>>> li.sort(func) 	# sort in place using user-defined comparison
+</code></pre>
+</section>
+
+<section>
+<h3>Tuples vs. Lists</h3>
+<ul>
+<li>Листите се побавни, но помоќни од tuples</li>
+<li>Листите може да се модифицираат</li>
+<li>Tuples се immutable и имаат многу помалку функционалности</li>
+<li>За конверзија меѓу tuples и листи се користат функциите <strong>list()</strong> и <strong>tuple()</strong>:
+<pre><code class="python">li = list(tu)
+tu = tuple(li)</code></pre>
+</li>
+</ul>
+</section>
+
+<section style="width: 980px;">
+<h3>Мапи - Dictionary</h3>
+<div style="float:left">
+<pre><code class="python">>>> d = {'user':'bozo', 'pswd':123}
+>>> d['user']
+'bozo'
+>>> d['pswd']
+123
+>>> d['bozo']
+</code></pre>
+<pre><code>Traceback (innermost last):
+File '&ltinteractive input&gt' line 1, in ?
+KeyError: bozo</code></pre>
+</div>
+<div style="float:right">
+<pre><code class="python" style="max-height:600px;width: 500px;">>>> d = {'user':'bozo', 'pswd':1234}
+>>> d['user'] = 'clown'
+>>> d
+{'user':'clown', 'pswd':1234}
+>>> d['id'] = 45
+>>> d
+{'user':'clown', 'id':45, 'pswd':1234}
+>>> d = {'user':'bozo', 'p':1234, 'i':34}
+>>> del d['user'] # Remove one.
+>>> d
+{'p':1234, 'i':34}
+>>> d.clear() 	# Remove all.
+>>> d
+{}
+>>> d = {'user':'bozo', 'p':1234, 'i':34}
+>>> d.keys() 	# List of keys.
+['user', 'p', 'i']
+>>> d.values() 	# List of values.
+['bozo', 1234, 34]
+>>> d.items() 	# List of item tuples.
+[('user','bozo'), ('p',1234), ('i',34)]
+</code></pre>
+</div>
+</section>
+
+<section style="text-align:left">
+<h3>Функции</h3>
+<ul><li>
+Дефинирање на функција со <strong>def</strong>
+<pre><code class="python">def times(x, y):
+  return x * y
+</code></pre>
+</li>
+<li>Опционални аргументи
+<pre><code class="python">def func(a, b, c = 10, d = 100):
+  print a, b, c, d
+>>> func(1, 2)
+1 2 10 100
+>>> func(1, 2, 3, 4)
+1 2 3 4
+</code></pre>
+</section>
+
+<section style="text-align:left">
+<h3>Функции</h3>
+<li>Сите функции враќаат вредност</li>
+<li>Дури и кога <strong>return</strong> не е експлицитно искористена</li>
+<li>Функциите без <strong>return</strong> директива ја враќаат специјалната вресност <strong>None</strong></li>
+<li>Не постои <strong>overloading</strong> на функции</li>
+<li>Две различни функции не може да имаат исто име дури и ако листата на аргументи е различна</li>
+<li>Функциите може да се користат како било која друга променлива (функции од повисок тип).</li>
+<li>Можат да бидат: аргументи на друга функција, return вредност на функција, можат да се доделуваат на променливи, може да се елементи на листи итн.
+</li></ul>
+</section>
+
+
+<section>
+<h3>Структурата if/elif/else</h3>
+<ul style="width:800px"><li>Слична како во други програмски јазици
+<pre><code class="python">person = 'Luke'
+if person == 'Per':
+    status = 'Pythonist'
+elif person == 'Luke':
+    status = 'Jedi knight'
+else:
+    status = 'unknown'
+print person, status
+</code></pre>
+</li></ul>
+</section>
+
+<section>
+<h3>Структурата for</h3>
+<ul><li>Во python for е слична на for each во други програмски јазици
+<pre><code class="python">s = 0
+# walk through list, assign to i
+for i in [0, 1, 2, 3, 4, 5, 6, 7, 8]:
+    s = s + i
+    if s > 10:
+        break	# quit 'for' loop, jump to after it
+
+print "i=%i, s=%i" % (i, s)
+</code></pre>
+
+<pre><code class="python">r = []
+# walks through string, char by char
+for c in 'this is a string with blanks':  
+    if c == ' ': continue	# skip rest of block, continue loop
+    r.append(c)
+
+print ''.join(r)
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h3>Структурата for</h3>
+<ul>
+<li>
+Со користење на функциите <strong>range</strong> и <strong>xrange</strong> станува слична на for структурата во C, Java итн.</li>
+<li>Функцијата <strong>range</strong> креира листа што може да биде доста неефикасно во поглед на меморија
+<pre><code class="python">>>> range(9)			# start=0, step=1 by default
+[0, 1, 2, 3, 4, 5, 6, 7, 8]
+>>> range(1, 12, 3)		# explicit start, end, step
+[1, 4, 7, 10]
+>>> range(10**9)		# MemoryError!
+</code></pre>
+</li>
+<li>
+Функцијата <strong>xrange</strong> креира итератор што е многу мемориски поефикасно од користење на range
+<pre><code class="python">s = 0
+for i in xrange(100000):
+    if i % 19 == 0:	# remainder: evenly divisible with 19?
+        s = s + i
+print s
+</code></pre>
+</li></ul>
+</section>
+
+<section>
+<h3>Структурата while</h3>
+<ul style="width:800px;">
+<li>
+Слична како во C или Java
+<pre><code class="python">#!/usr/bin/env python
+def fib(n): # return Fibonacci series up to n
+  """Return a list containing the Fibonacci series up to n."""
+  result = []
+  a, b = 0, 1
+  while a < n:
+   result.append(a)
+   a, b = b, a+b
+  return result
+print fib(100)	# [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+</code></pre>
+</li></ul>
+</section>
+
+<section>
+<h3>Работа со String-ови</h3>
+<pre><code style="max-height:1000px;" class="python">>>> s = 'a string, with stuff'
+>>> s.count('st')                  # how many substrings?
+2
+>>> s.find('stu')                  # give location of substring, if any
+15
+>>> three = '3'
+>>> three.isdigit()                # only digit characters in string?
+True
+>>> supper = s.upper()             # convert to upper case
+>>> supper
+'A STRING, WITH STUFF'
+>>> s.rjust(30)                    # right justify by adding blanks
+'          a string, with stuff'
+>>> "newlines\n\n\n".strip()       # a string literal also has methods!
+'newlines'
+>>> s.replace('stuff', 'characters') # replace substring (all occurrences)
+'a string, with characters'
+>>> s.replace('s', 'X', 1)         # replace only once
+'a Xtring, with stuff'
+</code></pre>
+</section>
+
+<section>
+<h3>Работа со String-ови</h3>
+<pre><code style="max-height:1000px; width:980px; font-size:18px;" class="python"># Returns index of string2 string in referenced string1.
+'string1'.find('string2') 
+# Returns string value of list1 but with string1 in between words.
+'string1'.join(list1) 
+# Returns completely lower/upper case version of string1.
+'string1'.lower/upper() 
+# Returns one string with whitespace removed.
+'string1'.strip() 
+# Returns list with string2 removed from string1. If string2 is not specified, white space is assumed.
+'string1'.split(['string2']) 
+# Returns string with all first letters capitalized.
+'string1'.title() 
+# returns string1 but with all instances of string2 replaced with string 3.
+'string1'.replace('string2','string3') 
+# Returns the number of times that string2 appears in string1.
+'string1'.count('string2') 
+# Returns True or False value if string1 ends with string2. Use 'string1'.startswith('string2') for the reverse.
+'string1'.endswith('string2')
+# Returns the number of times that string2 appears in string1. 
+'string1'.count('string2') 
+</code></pre>
+</section>
+
+<section>
+<h3>Стандарден Влез/Излез (std i/o)</h3>
+<ul>
+<li>
+За читање од стандарден влез се користат наредбите <strong>input</strong> и <strong>raw_input</strong></li>
+<ul><li>input го интерпретира влезот па враќа</li>
+<li>raw_input го враќа точниот string како што е внесен</li>
+</ul>
+<li>Функцијата <strong>print</strong> печати на стандарден излез
+exactly as typed, data not in quotes is interpreted first</li>
+<li>
+<pre><code class="python">>>> x = input('enter a number: ')
+enter a number: 3+4
+>>> x
+7
+>>> x,y = input('enter two number: ')
+enter two number: 3+4, 2*2
+>>> x,y
+(7,4)
+>>>x,y = raw_input('enter two numbers: ')
+enter two numbers: 3+4, 2*2
+>>> x,y
+('3+4', '2*2')
+>>> c = 4
+>>> print 'a', 1+2, c, "c"
+a 3 4 c
+</code></pre>
+</section>
+
+<section>
+<h3>Пристап до аргументи</h3>
+<pre><code class="python">#!/usr/bin/python
+import re
+import sys
+if len(sys.argv) != 3:
+  sys.exit(’Error: This script requires two arguments!’)
+infile = file(sys.argv[1],’r’)
+lines = infile.readlines()
+count=0
+for k in lines:
+  if re.search(sys.argv[2],k):
+    count=count+1
+    print ’The regular express’, sys.argv[2], ’was found’, count, ’times
+in the file’, sys.argv[1]
+</code></pre>
+</section>
+
+
+<section>
+<h3>Работа со датотеки</h3>
+<ul>
+<li><strong>filevar.read()</strong> - ја чита целата датотека</li>
+<li><strong>filevar.readline()</strong> - чита една линија од датотеката</li>
+<li><strong>filevar.readlines()</strong> - ја чита целата датотека како низа од string-ови, по еден string за секоја линија</li>
+<li><strong>filevar.seek(offset,from what)</strong> seek offset bytes from either
+beginning (0), current position (1) or end of file (2). If you
+don’t have a from what it seeks from the beginning of the file</li>
+</ul>
+</section>
+
+<section>
+<h3>Работа со датотеки</h3>
+<pre><code class="python">#!/usr/bin/python
+infile=file(’Text.txt’,’r’)
+for i in range(5):
+  line = infile.readline()
+print line[:-1] # Remove Newlines
+
+# To write we just use the mode 'w'.
+outfile = file('output.txt','w')
+count=1
+outfile.write('This is the first line of text\n')
+count = count + 1
+outfile.write('This is line number %d' % (count))
+outfile.close()
+</code></pre>
+<pre><code class="python">#!/usr/bin/python
+infile=file('input.txt','r')
+outfile=file('out.txt','w')
+linelist=infile.readlines()
+# Writes to out.txt every 10th line of input.txt
+for i in range(1,len(linelist),10):
+  outfile.write(linelist[i])
+</code></pre>
+</section>
+
+<section>
+<h3>Примери</h3>
+</section>
+
+
+</div>
+
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
+
+<script>
+
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+    rollingLinks: false,
+    theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+    transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
+
+    // Optional libraries used to extend on reveal.js
+    dependencies: [
+    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+    { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+    // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+    // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+    ]
+    });
+
+    presentable.toc({framework: "revealjs"});
+
+</script>
+
+</body>
+</html>
