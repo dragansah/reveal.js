@@ -815,6 +815,8 @@ for i in range(1,len(linelist),10):
                     <pre><code class="python">#!/usr/bin/python
 # Print the contents of the files listed on the command line.
 import sys
+if len(sys.argv) == 1:
+    sys.exit("Usage: "+sys.argv[0]+" files...");
 for fn in sys.argv[1:]:
     fin = open(fn, 'r')
     print "\n*** Contents of", fn, "***"
@@ -906,7 +908,7 @@ for dir in dirs:
 </code></pre>
                 </section>
 
-                <section style="text-align:left">
+                <section style="text-align:left" id="primer4">
                     <h3>Пример 4 (1)</h3>
                     <div>
                     <pre><code>cat /etc/passwd</code>
@@ -969,18 +971,20 @@ for line in os.popen('who').readlines():
         print '%-14s %s' % (user + ':', iddict[user])
         del iddict[user]
 </code></pre>
-</section>
+                </section>
 
-<section style="text-align:left">
-<h3>Пример 5</h3>
-<ol><li>
-Напишете Python скрипта која врши конверзија од CSV (comma seperated values) датотека со колони Make,Insurance Class, Premium ($),Age (years) во TSV (tab separated values) датотека која ги содржи само колоните Make Premium($) Insurance_Class.</li>
-<li>
-Напишете Python скрипта која печати ги печати просекот за колоната Premium($), моделот на најстариот автомобил во листата и моделите со најголема и најмала класа на осигурување.
-</li></ol>
+                <section style="text-align:left" id="primer5">
+                    <h3>Пример 5</h3>
+                    <ol>
+                        <li>
+                        Напишете Python скрипта која врши конверзија од CSV (comma seperated values) датотека со колони Make,Insurance Class, Premium ($),Age (years) во TSV (tab separated values) датотека која ги содржи само колоните Make Premium($) Insurance_Class.</li>
+                        <li>
+                        Напишете Python скрипта која печати ги печати просекот за колоната Premium($), моделот на најстариот автомобил во листата и моделите со најголема и најмала класа на осигурување.
+                        </li>
+                    </ol>
 
-Влез:
-<pre>
+                    Влез:
+                    <pre>
 Make,Insurance Class,Premium ($),Age (years)
 Ferrari,10,2432.50,3
 BMW,8,1231.10,1
@@ -988,24 +992,27 @@ VW,6,862.20,4
 Fiat,4,591.10,2
 Bugatti,15,4312.00,1
 </pre>
-</section>
+                </section>
 
-<section style="text-align:left">
-<h3>Пример 5.1</h3>
-<div style="font-family:monospace">
-Влез:
-<pre>
+
+                <section style="text-align:left">
+                    <h3>Пример 5.1</h3>
+                    <div style="font-family:monospace">
+                        Влез:
+                        <pre>
 Make,Insurance Class,Premium ($),Age (years)
 Ferrari,10,2432.50,3
 BMW,8,1231.10,1
 VW,6,862.20,4
 Fiat,4,591.10,2
 Bugatti,15,4312.00,1
-</pre>
-</div>
-<br/>
-<pre><code class="python">#!/usr/bin/env python
+                        </pre>
+                    </div>
+                    <br/>
+                    <pre><code class="python">#!/usr/bin/env python
 import sys
+if len(sys.argv) == 1:
+    sys.exit("Usage: "+sys.argv[0]+" file");
 lines = open( sys.argv[1], "r" ).readlines()
 # print our own header
 print "Make   Premium($)   Insurance_class"
@@ -1015,19 +1022,19 @@ for i in range( 1, len(lines) ):
     words = line.split(",")
     if len(words) >= 4:
         print "%s  %s  %s" % (words[0], words[2], words[3])
-</code></pre>
-</section>
+                    </code></pre>
+                </section>
 
-<section style="text-align:left">
-<h3>Пример 5.2</h3>
-<pre><code class="python" style="font-size:18px;line-height:20px;">#!/usr/bin/env python
+                <section style="text-align:left">
+                    <h3>Пример 5.2</h3>
+                    <pre><code class="python" style="font-size:18px;line-height:20px;">#!/usr/bin/env python
 import sys
+if len(sys.argv) == 1:
+    sys.exit("Usage: "+sys.argv[0]+" files...");
 lines = open( sys.argv[1], "r" ).readlines()
-total_premium = 0
-nmakes = 0
-oldest_age = 0
-highest_class = 0
-lowest_class = 1000
+# initialization of temporary variables
+total_premium,nmakes, oldest_age, highest_class, lowest_class = 0, 0, 0, 0, 1000
+
 for i in range( 1, len(lines) ):
     line = lines[i].rstrip()
     words = line.split(",")
@@ -1051,32 +1058,34 @@ avg_premium = total_premium / nmakes
 print "The average premium is $%f." % avg_premium
 print "The oldest make is %s." % oldest_make
 print "The make in the lowest class is %s." % lowest_make
-print "The make in the highest class is %s." % highest_make
-</code></pre>
-</section>
+print "The make in the highest class is %s." % highest_make</code></pre>
+                </section>
 
-<section style="text-align:left">
-<h3>Пример 6</h3>
-<ul>
-<li>
-convert е UNIX програма која врши конверзија од еден во друг формат на слики (на пример конверзија помеѓу JPEG и PNG слики). Напишете Python скрипта што ги конвертира сите JPEG датотеки во даден директориум во PNG датотеки. 
-</li>
-<li>
-Наредбата convert функционира на следниот начин:
-<br/><br/>
-<pre>
+                <section style="text-align:left" id="primer6">
+                    <h3>Пример 6</h3>
+                    <ul>
+                        <li>
+                            convert е UNIX програма која врши конверзија од еден во друг формат на слики (на пример конверзија помеѓу JPEG и PNG слики). Напишете Python скрипта што ги конвертира сите JPEG датотеки во даден директориум во PNG датотеки. 
+                        </li>
+                        <li>
+                            Наредбата convert функционира на следниот начин:
+                            <br/><br/>
+                            <pre>
 convert file.jpg file.png
-</pre>
-</li>
-<ul>
-</section>
+                            </pre>
+                        </li>
+                    <ul>
+                </section>
 
-<section style="text-align:left">
-<h3>Пример 6</h3>
-<pre><code class="python">#!/usr/bin/env python
+                <section style="text-align:left">
+                    <h3>Пример 6</h3>
+                    <pre><code class="python">#!/usr/bin/env python
 import sys
 import os
 import re
+
+if len(sys.argv) == 1:
+    sys.exit("Usage: "+sys.argv[0]+" file");
 
 directory = sys.argv[1]
 
@@ -1092,27 +1101,30 @@ for jpeg_file in jpeg_files:
     print "Running '%s'..." % command
 
     os.system( command )
-</code></pre>
-<ul>
-</section>
+                    </code></pre>
+                </section>
 
-<section style="text-align:left">
-<h3>Пример 7</h3>
-<ul><li>
-Напишете python скрипта што се однесува како UNIX наредбата <strong>grep</strong> (потребна е едноставна имплементација без опциите кои ги има во grep).
-</li>
-<li>
-Пример: <br/><br/><pre>$./grep the file.txt</pre> 
-<br/>треба да ги испечати сите линии во кои се појавува зборот "the". Дополнително програмата треба да ги обележи најдените зборови со ** пред и по најдениот збор.
-</li>
-</ul>
-</section>
+                <section style="text-align:left" id="primer7">
+                    <h3>Пример 7</h3>
+                    <ul>
+                        <li>
+                            Напишете python скрипта што се однесува како UNIX наредбата <strong>grep</strong> (потребна е едноставна имплементација без опциите кои ги има во grep).
+                        </li>
+                        <li>
+                            Пример: <br/><br/><pre>$./grep the file.txt</pre> 
+                            <br/>треба да ги испечати сите линии во кои се појавува зборот "the". Дополнително програмата треба да ги обележи најдените зборови со ** пред и по најдениот збор.
+                        </li>
+                    </ul>
+                </section>
 
-<section style="text-align:left">
-<h3>Пример 7</h3>
-<pre><code class="python">#!/usr/bin/env python
+                <section style="text-align:left">
+                    <h3>Пример 7</h3>
+                    <pre><code class="python">#!/usr/bin/env python
 import sys
 import re
+
+if len(sys.argv) < 3:
+    sys.exit("Usage: "+sys.argv[0]+" find-string file");
 
 search_string = sys.argv[1]
 
@@ -1122,36 +1134,42 @@ lines = open( sys.argv[2], "r" ).readlines()
 
 for line in lines:
     print re.sub( search_string, replace_string, line )
-</code></pre>
-</section>
+                    </code></pre>
+                </section>
 
 
-<section style="text-align:left">
-<h3>Пример 8</h3>
-<ul><li><strong>head</strong> и <strong>tail</strong> се две многу корисни UNIX програми кои се користат за печатење на првите односно последните линии од дадена датотека (на пример многу се корисни кога набљудувате многу големи датотеки кои содржат логови од веб сервер на пример). Напишете Python скрипта што функционира на истиот начин.
-</li>
-<li>
-Ги печати првите пет линии од дадената датотека.
-<pre>$./head.py 5 filename</pre>
-</li>
+                <section style="text-align:left" id="primer8">
+                    <h3>Пример 8</h3>
+                    <ul>
+                        <li>
+                            <strong>head</strong> и <strong>tail</strong> се две многу корисни UNIX програми кои се користат за печатење на првите односно последните линии од дадена датотека (на пример многу се корисни кога набљудувате многу големи датотеки кои содржат логови од веб сервер на пример). Напишете Python скрипта што функционира на истиот начин.
+                        </li>
+                        <li>
+                            Ги печати првите пет линии од дадената датотека.
+                            <pre>$./head.py 5 filename</pre>
+                        </li>
 
-<li>
-Ги печати последните десет линии од дадената датотека.
-<pre>$./tail.py 10 filename</pre>
-</li>
-<li>Дополнително, напишете скрипта за <strong>body</strong> наредба, која ги печати линиите на средина од дадената датотека. На пример:
-<pre>$./body.py 20 25 filename</pre>
-Ги печати последните од 20 до 25 од дадената датотека.
-</li>
-</ul>
-</section>
+                        <li>
+                            Ги печати последните десет линии од дадената датотека.
+                            <pre>$./tail.py 10 filename</pre>
+                        </li>
+                        <li>
+                            Дополнително, напишете скрипта за <strong>body</strong> наредба, која ги печати линиите на средина од дадената датотека. На пример:
+                            <pre>$./body.py 20 25 filename</pre>
+                            Ги печати последните од 20 до 25 од дадената датотека.
+                        </li>
+                    </ul>
+                </section>
 
 
 
-<section style="text-align:left">
-<h3>Пример 8: head</h3>
-<pre><code class="python">#!/usr/bin/env python
+                <section style="text-align:left">
+                    <h3>Пример 8: head</h3>
+                    <pre><code class="python">#!/usr/bin/env python
 import sys
+
+if len(sys.argv) < 3:
+    sys.exit("Usage: "+sys.argv[0]+" num-lines file");
 
 n = int( sys.argv[1] )
 
@@ -1166,14 +1184,16 @@ if n > nlines:
 
 for i in range(0, n):
     print lines[i],
-</code></pre>
-<ul>
-</section>
+                    </code></pre>
+                </section>
 
-<section style="text-align:left">
-<h3>Пример 8: tail</h3>
-<pre><code class="python">#!/usr/bin/env python
+                <section style="text-align:left">
+                    <h3>Пример 8: tail</h3>
+                    <pre><code class="python">#!/usr/bin/env python
 import sys
+
+if len(sys.argv) < 3:
+    sys.exit("Usage: "+sys.argv[0]+" num-lines file");
 
 n = int( sys.argv[1] )
 
@@ -1186,14 +1206,16 @@ if n > nlines:
 
 for i in range(nlines - n, nlines):
     print lines[i],
-</code></pre>
-<ul>
-</section>
+                    </code></pre>
+                </section>
 
-<section style="text-align:left">
-<h3>Пример 8: body</h3>
-<pre><code class="python">#!/usr/bin/env python
+                <section style="text-align:left">
+                    <h3>Пример 8: body</h3>
+                    <pre><code class="python">#!/usr/bin/env python
 import sys
+
+if len(sys.argv) < 4:
+    sys.exit("Usage: "+sys.argv[0]+" line-from line-to file");
 
 start = int( sys.argv[1] )
 end = int( sys.argv[2] )
@@ -1210,183 +1232,219 @@ if end >= nlines:
 
 for i in range(start, end+1):
     print lines[i],
-</code></pre>
-<ul>
-</section>
+                    </code></pre>
+                </section>
 
 
-<section style="text-align:left; font-size:28px;">
-<h3>Пример 9 - e-book reader</h3>
-Напишете python скрипта <strong>reader.py</strong> која претставува рудиментиран читач на е-книги - "plain-text eBook reader".
-Идејата е следна: Корисникот на стартува програмата, чита дел од книгата и ја затвара. Следниот пак кога корисникот ќе ја стартува истата програма, тој треба да продолжи од истото место каде што застанал минатиот пат.
-<br/><br/>
-Скриптата секогаш има еден задолжителен аргумент, називот на датотеката која треба да се отвори. Исто така програмата има еден не задолжителен аргумент означен со flag-oт <strong>-n</strong> со кој се задава колку линии да се прикажат одеднаш (по страна), со default вредност 40 доколку аргументот не е зададен. За навигација на страни се поддржуваат само три операции: следна страна (со избор на <strong>n</strong>), претходна страна (со избор на <strong>p</strong>) и излез (со избор на <strong>q</strong>).
-</section>
+                <section style="text-align:left; font-size:28px;" id="primer9">
+                    <h3>Пример 9 - e-book reader</h3>
+                    Напишете python скрипта <strong>reader.py</strong> која претставува рудиментиран читач на е-книги - "plain-text eBook reader".
+                    Идејата е следна: Корисникот на стартува програмата, чита дел од книгата и ја затвара. Следниот пак кога корисникот ќе ја стартува истата програма, тој треба да продолжи од истото место каде што застанал минатиот пат.
+                    <br/><br/>
+                    Скриптата секогаш има еден задолжителен аргумент, називот на датотеката која треба да се отвори. Исто така програмата има еден не задолжителен аргумент означен со flag-oт <strong>-n</strong> со кој се задава колку линии да се прикажат одеднаш (по страна), со default вредност 40 доколку аргументот не е зададен. За навигација на страни се поддржуваат само три операции: следна страна (со избор на <strong>n</strong>), претходна страна (со избор на <strong>p</strong>) и излез (со избор на <strong>q</strong>).
+                </section>
 
-<section style="text-align:left; font-size:28px;">
-<h3>Пример 9 - e-book reader</h3>
-Следуваат некои идеи за имплементацијата на скриптата:
-<ul>
-<li>
-При стартување на скрипата, провери дали home директориумот на корисникот содржи датотека <strong>~/.reader_rc</strong>. Доколку не постои датотеката, тогаш креирај ја. Тука ќе го чуваме бројот на страна до каде застанал корисникот кога ја затворил програмата за сите датотеки кои биле некогаш отворени со нашиот читач.
-</li>
-<li>
-Датотеката <strong>.reader_rc</strong> ќе биде CSV датотека со две колони <strong>file_content_hash, line_count</strong>, каде <strong>file_content_hash</strong> е hash (на пример MD5 ili SHA1) од целата содржина на датотеката која се чита (е-книгата), а <strong>line_count</strong> е линијата до каде стигнал корисникот при затварање на програмата. Предоста на чување на hash од содржината на датотеката (наместо име на датотека) е што нашата програма ќе работи доколку содржината на датотеката се менува, самата датотека се преименува или се премести. Тоа значи дека нашата скрипта зависи од содржината на датотеката, а не од нејзиното име или локација.
-Еве еден пример за датотеката <strong>.reader_rc</strong>:
-<pre style="margin-top:10px;width: 350px;">
+                <section style="text-align:left; font-size:28px;">
+                    <h3>Пример 9 - e-book reader</h3>
+                    Следуваат некои идеи за имплементацијата на скриптата:
+                    <ul>
+                        <li>
+                            При стартување на скрипата, провери дали home директориумот на корисникот содржи датотека <strong>~/.reader_rc</strong>. Доколку не постои датотеката, тогаш креирај ја. Тука ќе го чуваме бројот на страна до каде застанал корисникот кога ја затворил програмата за сите датотеки кои биле некогаш отворени со нашиот читач.
+                        </li>
+                        <li>
+                            Датотеката <strong>.reader_rc</strong> ќе биде CSV датотека со две колони <strong>file_content_hash, line_count</strong>, каде <strong>file_content_hash</strong> е hash (на пример MD5 ili SHA1) од целата содржина на датотеката која се чита (е-книгата), а <strong>line_count</strong> е линијата до каде стигнал корисникот при затварање на програмата. Предоста на чување на hash од содржината на датотеката (наместо име на датотека) е што нашата програма ќе работи доколку содржината на датотеката се менува, самата датотека се преименува или се премести. Тоа значи дека нашата скрипта зависи од содржината на датотеката, а не од нејзиното име или локација.
+                            Еве еден пример за датотеката <strong>.reader_rc</strong>:
+                            <pre style="margin-top:10px;width: 350px;">
 3e3ac0b27b0adeb9138206eea2c43bb2,120
 5eb63bbbe01eeed093cb22bb8f5acdc3,0
 98f84fd484f8c2273f28cc645935f650,40
-</pre>
-</li>
-</ul>
-</section>
+                            </pre>
+                        </li>
+                    </ul>
+                </section>
 
-<section style="text-align:left; font-size:28px;">
-<h3>Пример 9 - e-book reader</h3>
-<ul>
-<li>
-Кога се стартува програмата, се отвара датотеката со даденото име како прв аргумент, се пресметува hash вредноста на содржината на датотеката со користење на MD5 hash, се чита датотеката ~/.reader_rc и се позиционира на соодветната линија за дадениот hash. Потоа се прикажува бројот на линии зададен со аргументот -n, а доколку не е даден аргументот -n  се прикажуваат 40 линии.
-</li>
-<li>
-Со избор на копчињата <strong>n/p</strong>, скриптата ќе го ажурира податокот за прочитани линии во ~./reader_rc датотеката и ќе ја испечати претходната/следната страна од книгата.
-</li>
-<li>
-Со избор на копчето <strong>q</strong> програмата излегува.
-</li>
-</ul>
-</section>
+                <section style="text-align:left; font-size:28px;">
+                    <h3>Пример 9 - e-book reader</h3>
+                    <ul>
+                        <li>
+                            Кога се стартува програмата, се отвара датотеката со даденото име како прв аргумент, се пресметува hash вредноста на содржината на датотеката со користење на MD5 hash, се чита датотеката ~/.reader_rc и се позиционира на соодветната линија за дадениот hash. Потоа се прикажува бројот на линии зададен со аргументот -n, а доколку не е даден аргументот -n  се прикажуваат 40 линии.
+                        </li>
+                        <li>
+                            Со избор на копчињата <strong>n/p</strong>, скриптата ќе го ажурира податокот за прочитани линии во ~./reader_rc датотеката и ќе ја испечати претходната/следната страна од книгата.
+                        </li>
+                        <li>
+                            Со избор на копчето <strong>q</strong> програмата излегува.
+                        </li>
+                    </ul>
+                </section>
 
-<section>
-<pre><code class="python" style="font-size:14px;line-height:14px;">#!/usr/bin/python
+                <section>
+                    <pre><code class="python">#!/usr/bin/python
 import sys
 import os
 import hashlib
-def readBook(commands):
+def hashOfFileContent(lines):
+    """Creates MD5 of the lines content and returns a 
+    string with hexdigest of the created hash"""
+    md5OfBook = hashlib.md5()
+    for line in lines:
+        md5OfBook.update(line)
+    hashOfBook = str(md5OfBook.hexdigest())
+    return hashOfBook
+
+def getBookInfo():
+    """Loads the content of the $HOME/.reader_rc file into 
+    a dictionary and returns the created dictionary """
     readerFile = os.getenv("HOME")+"/.reader_rc"
+    #initialize the result dictionary
+    bookInfo={}
+
+    if os.path.exists(readerFile):
+        reader = open(readerFile, 'r+')
+        while 1:
+            line=reader.readline()
+            if not line: break;
+            [hashVal, count] = line.split(",")
+            bookInfo[hashVal]=int( count )
+        reader.close() # Finish with .reader_rc
+    return bookInfo</code></pre>
+                </section>
+                <section>
+                    <pre><code class="python">def updateInfo(bookInfo):
+    """Saves the new values of the book info into the $HOME/.reader_rc file"""
+    readerFile = os.getenv("HOME")+"/.reader_rc"
+    reader = open(readerFile, 'w+')
+    for k in bookInfo.keys():
+        reader.write("%s,%d\n" % (k, bookInfo[k]))
+    reader.close()
+
+def displayPage(allLines, start, pageSize):
+    """Displays the current page from the lines of the book"""
+    os.system("clear") # call the clear command which clears the screen
+    for i in range(start, start+pageSize):
+        if i < len(allLines):
+            print allLines[i],
+        else:
+            # the end of the book has been reached
+            break
+
+def loadArguments(commands):
+    """Loads the command line arguments into corresponding variables"""
     pageSize = 40
-    # Take input
     if len(commands) == 2:
         fileName = commands[1]
     elif len(commands) == 4:
         if commands[1] == "-n":
             pageSize = int(commands[2])
             fileName = commands[3]
-        else:
-            print "Format command as 'filename' or '-n pages filename'"
-            return
-    else:
-        print "Format command as 'filename' or '-n pages filename'"
-        return
-    book = open(fileName, 'r')
-    allLines = []
-    md5OfBook = hashlib.md5()
-    for line in book:
-        allLines.append(line)
-        md5OfBook.update(line)
-    book.close()
-    hashOfBook = str(md5OfBook.hexdigest())
-    if os.path.exists(readerFile):
-        reader = open(readerFile, 'r+')
-    else:
-        reader = open(readerFile, 'w+')
-    allBooks = reader.readlines()
-    reader.close() # Finish with .reader_rc
+        else: sys.exit("Format command as 'filename' or '-n pages filename'")
+    else: sys.exit("Format command as 'filename' or '-n pages filename'")
+    return pageSize, fileName</code></pre>
+                </section>
 
-    lineNumber = -1
-    bookIdx = -1
-    for i in range(len(allBooks)):
-        b = allBooks[i]
-        [hashVal, count] = b.split(",")
-        if hashVal == str(hashOfBook):
-            lineNumber = int(count)
-            bookIdx = i
-    if bookIdx == -1:
-        allBooks.append(hashOfBook+","+"0"+"\n")
-        bookIdx = len(allBooks) - 1
-        lineNumber = 0
-</code></pre>
-</section>
-
-<section>
-<pre><code class="python" style="font-size:14px;line-height:14px;">while True:
-        os.system("clear")
-        for i in range(lineNumber, lineNumber+pageSize):
-            if i < len(allLines):
-                print allLines[i],
-            else:
-                break
-        key = ""
-        while key != "n" and key != "p" and key != "q":
-            key = raw_input()
-            if key != "n" and key != "p" and key != "q":
-                print "Valid commands are next (n), previous(p) and quit (q)"
-            if key == "n":
-                os.system("clear")
+                <section>
+                    <pre><code class="python">def handleUserActions(hashOfBook,lineNumber,pageSize,bookInfo,allLines):
+    """Waits for the user to hit a key and updates the lineNumber argument"""
+    key = ""
+    while key != "n" and key != "p" and key != "q":
+        key = raw_input()
+        if key != "n" and key != "p" and key != "q":
+            print "Valid commands are next (n), previous(p) and quit (q)"
+        if key == "n":
+            if lineNumber+pageSize > len(allLines):
+                print "There are no more pages!"
+                key="" # with this we will countinue waiting for the next command
+            else: 
                 lineNumber += pageSize
-                updateReader(lineNumber, bookIdx, hashOfBook, allBooks, readerFile)
-            elif key == "p":
-                os.system("clear")
-                lineNumber -= pageSize
-                if lineNumber < 0:
-                    lineNumber = 0
-            elif key == "q":
-                os.system("clear")
-                updateReader(lineNumber, bookIdx, hashOfBook, allBooks, readerFile)
-                print "Thanks for using the reader!"
-                return
-def updateReader(lineNumber, bookIdx, hashOfBook, allBooks, readerFile):
-    allBooks[bookIdx] = hashOfBook+","+str(lineNumber)+"\n"
-    reader = open(readerFile, "w")
-    for b in allBooks:
-        reader.write(b)
-    reader.close()
+                bookInfo[hashOfBook]=lineNumber
+                updateInfo(bookInfo)                
+        elif key == "p":
+            lineNumber -= pageSize
+            if lineNumber < 0:
+                lineNumber = 0
+            bookInfo[hashOfBook]=lineNumber
+            updateInfo(bookInfo)
+        elif key == "q":
+            os.system("clear")
+            print "Thanks for using the reader!"
+            return # doesn't return nothing, 
+            # so the caller will know that the "q" key has been pressed
+    # the changes of the lineNumber are not visible outside of this function,
+    # so we have to return this value 
+    return lineNumber
+</code></pre>
+                </section>
+                <section>
+                    <pre><code>def readBook(commands):
+    # load the arguments
+    pageSize,fileName=loadArguments(commands)
+    # read the book content
+    book = open(fileName, 'r')
+    allLines = book.readlines()
+    book.close()
+    # get the MD5 hash digest of the file content
+    hashOfBook = hashOfFileContent(allLines)
+    # get the book info dictionary
+    bookInfo=getBookInfo()
+    # get the start line of the current book
+    if bookInfo.has_key(hashOfBook):
+        lineNumber=bookInfo[hashOfBook]
+    else: 
+        lineNumber=0
+        # add the new book into the info and save the info to the file
+        bookInfo[hashOfBook]=lineNumber
+        updateInfo(bookInfo)
+    while True:
+        displayPage(allLines,lineNumber,pageSize)
+        # handling of the key commands
+        lineNumber=handleUserActions(hashOfBook, lineNumber, pageSize, bookInfo, allLines)
+        # the user has pressed the (q) key
+        if not lineNumber: return
+
 # Run script
 readBook(sys.argv)
 </code></pre>
-</section>
+                </section>
+
+                <section style="text-align:left">
+                    <h3>Прашања ?</h3>
+                </section>
 
 
+            </div>
+        </div>
 
-<section style="text-align:left">
-<h3>Прашања ?</h3>
-</section>
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
 
+        <script>
 
-</div>
-</div>
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            rollingLinks: false,
+            theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+            transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
 
-<script src="lib/js/head.min.js"></script>
-<script src="js/reveal.min.js"></script>
-
-<script>
-
-    // Full list of configuration options available here:
-    // https://github.com/hakimel/reveal.js#configuration
-    Reveal.initialize({
-    controls: true,
-    progress: true,
-    history: true,
-    center: true,
-    rollingLinks: false,
-    theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-    transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
-
-    // Optional libraries used to extend on reveal.js
-    dependencies: [
-    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-    { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-    // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
-    // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
-    ]
-    });
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+            { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+            { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+            { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+            { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+            // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+            // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+            ]
+            });
 
 
-</script>
+        </script>
 
-</body>
+    </body>
 </html>
