@@ -73,7 +73,7 @@
                 </section>
                 
 
-                <section  id="zad1">
+                <section id="zad2">
                     <h3>Задача 2: Управување со процеси</h3>
                     <ul>
                         <li>Креирајте <b>Python</b> скрипта која ќе ги излиста сите активни процеси за сите корисници и ќе овозможи терминирање само на процесите на најавениот корисник. Секој од процесите треба да се излиста во следниот формат:
@@ -121,7 +121,7 @@ riste    14436  0.0  0.0  18036  1268 pts/1    R+   11:20   0:00 ps -au</pre>
 </code></pre>           
                 </section>
                 
-                <section id="zad1">
+                <section id="zad3">
                     <h3>Задача 3: Инверзен индекс</h3>
                     <ul>
                         <li>
@@ -131,7 +131,7 @@ riste    14436  0.0  0.0  18036  1268 pts/1    R+   11:20   0:00 ps -au</pre>
                         <li>
                             Датотеката .reverse_index.idx треба да ја има следната структура:
                             <pre>
-збор1:file1.txt,0,41;file2.txt,17;file6.txt,78
+збор1:file1.txt,0,41;file2.txt,17;file6.txt,5
 збор2:file1.txt,23,61,90;file2.txt,7,56
 ...</pre>
                             Каде најпрво го имаме зборот кој го индексираме, по што следуваат (разделени со :) позициите на неговото појавување во секоја од датотеките, во формат:<br/>
@@ -154,7 +154,7 @@ riste    14436  0.0  0.0  18036  1268 pts/1    R+   11:20   0:00 ps -au</pre>
     "збор1": {
         "file1.txt" : [0,41] ,
         "file2.txt" : [17],
-        "file6.txt" : [78]
+        "file6.txt" : [5]
     }, 
     "збор2" : {
         "file1.txt" : [23,61,90] ,
@@ -187,73 +187,196 @@ riste    14436  0.0  0.0  18036  1268 pts/1    R+   11:20   0:00 ps -au</pre>
 
                 </section>
 
+
                 <section>
                     <h3>Задача 3: Решение</h3>
                     <pre><code class="python">#!/usr/bin/python
-# Print the contents of the files listed on the command line.
-import sys
-if len(sys.argv) == 1:
-    sys.exit("Usage: "+sys.argv[0]+" files...");
-for fn in sys.argv[1:]:
-    fin = open(fn, 'r')
-    print "\n*** Contents of", fn, "***"
-    # Print the file, with line numbers.
-    lno = 1
-    while 1:
-        line = fin.readline()
-        if not line: break;
-        print '%3d: %-s' % (lno, line[:-1])
-        lno = lno + 1
-    fin.close()
-print
-</code></pre>
+import sys, os
+def readIndex():
+    """This function is used to load the index content. It returns dictionary
+    which has words as keys, and another dictionary as value (with file path
+    as key, and list of word positions as value). The file has this structure
+    for each line: збор1:file1.txt,0,41;file2.txt,17;file6.txt,5"""
+    index={}
+    indexFile = os.getenv("HOME")+"/.reverse_index.idx"
+    if os.path.exists(indexFile):
+        reader = open(indexFile, 'r+')
+        while 1:
+            line=reader.readline().strip()
+            if not line: break;
+            [word,filepos]=line.split(":")
+            parts=filepos.split(";")
+            for p in parts:
+              fileinfo=p.split(",")
+              filePath=fileinfo[0]
+              pos=fileinfo[1:]
+              if(index.has_key(word)): wordMap=index[word]
+              else:
+                  wordMap={}
+                  index[word]=wordMap
+              wordMap[filePath]=pos
+        reader.close()
+    return index</code></pre>
                 </section>
 
                  <section>
                     <h3>Задача 3: Решение</h3>
-                    <pre><code class="python">#!/usr/bin/python
-# Print the contents of the files listed on the command line.
-import sys
-if len(sys.argv) == 1:
-    sys.exit("Usage: "+sys.argv[0]+" files...");
-for fn in sys.argv[1:]:
-    fin = open(fn, 'r')
-    print "\n*** Contents of", fn, "***"
-    # Print the file, with line numbers.
-    lno = 1
-    while 1:
-        line = fin.readline()
-        if not line: break;
-        print '%3d: %-s' % (lno, line[:-1])
-        lno = lno + 1
-    fin.close()
-print
-</code></pre>
+                    <pre><code class="python">def writeIndex(index):
+    """This function stores the values of the index into the
+    '.reverse_index.idx' file"""
+    indexFile = os.getenv("HOME")+"/.reverse_index.idx"
+    writer = open(indexFile, 'w+')
+
+    for word in index.keys():
+        line= "%s:" % (word)
+        filesPos=index[word]
+        for file in filesPos.keys():
+            line += file
+            for pos in filesPos[file]:
+                line+=",%s" %(pos)
+            line+=";"
+        #remove the last semicolon and append \n before write
+        writer.write("%s\n" % (line[:-1]))
+
+    writer.close()</code></pre>
                 </section>
 
                  <section>
                     <h3>Задача 3: Решение</h3>
-                    <pre><code class="python">#!/usr/bin/python
-# Print the contents of the files listed on the command line.
-import sys
-if len(sys.argv) == 1:
-    sys.exit("Usage: "+sys.argv[0]+" files...");
-for fn in sys.argv[1:]:
-    fin = open(fn, 'r')
-    print "\n*** Contents of", fn, "***"
-    # Print the file, with line numbers.
-    lno = 1
-    while 1:
-        line = fin.readline()
-        if not line: break;
-        print '%3d: %-s' % (lno, line[:-1])
-        lno = lno + 1
-    fin.close()
-print
-</code></pre>
+                    <pre><code class="python">def indexDocument(filename):
+    """Creates dictionary with words as keys, and list of their positions into
+    the document as values"""
+    fileIndex={}
+    if not os.path.exists(filename): return # non existing file, nothing to index
+    pos, startpos, inword, word=0, 0, False, ""
+    content=open(filename,'r').read()
+    for c in content:
+        if inword and not c.isalpha():
+            # end of word
+            if fileIndex.has_key(word):
+                positions=fileIndex[word]
+            else:
+                positions=[]
+                fileIndex[word]=positions
+            positions.append(startpos)
+            word,inword="",False
+        elif not inword and c.isalpha():
+            # first letter of word
+            startpos=pos
+            inword=True
+            word+=c
+        elif c.isalpha():
+            # in word
+            word+=c
+        pos=pos+1
+    return fileIndex</code></pre>
                 </section>
 
+
+                <section>
+                    <h3>Задача 3: Решение</h3>
+                    <pre><code class="python">def mergeIndex(index, filename, fileIndex):
+    """Merges the content of the file index with the content of the general index"""
+    if fileIndex:
+        for word in fileIndex.keys():
+            if index.has_key(word):
+                filepos=index[word]
+            else:
+                filepos={}
+                index[word]=filepos
+            filepos[filename]=fileIndex[word]
+
+def indexArguments():
+    files=sys.argv[1:]
+
+    index=readIndex()
+    for file in files:
+        fileIndex=indexDocument(file)
+        mergeIndex(index, file, fileIndex)
+    #print index
+    writeIndex(index)
+
+# run the indexing
+indexArguments()</code></pre>        
+                </section>
+                
                         
+                <section  id="zad4">
+                    <h3>Задача 4: Пребарување низ датотеки</h3>
+                    <ul>
+                       <li>Да се напише <strong>Python</strong> скрипта која ќе пребарува низ датотеките индексирани во претходната задача. </li>
+                       <li>Скриптата треба да чека корисникот да го внесе зборот по кој ќе се пребарува, по што доколку е пронајден, ќе ни ги прикаже резултатите, а доколку не е пронајден, ќе ни прикаже соодветна порака. </li>
+                       <li>Резултатите се состојат од името на датотеката во која е пронајден зборот, по што следува контекстот во кој се наоѓа зборот во датотеката. </li>
+                       <li>
+                           Контекстот на зборот во датотеката е стринг со должина од 20 карактери, во кои зборот ја има централната позиција, е со големи букви и е опкружен со <strong>*</strong>  (нареден слајд).                           
+                       </li>
+                       <li>За крај на пребарувањето се корисникот треба да внесе <strong>q</strong>.</li>
+                    </ul>
+                </section> 
+
+
+                <section>
+                    <h3>Задача 4: Приказ на пребарувањето</h3>
+                    <pre>Внесете збор за пребарување или q за крај: збор1
+РЕЗУЛТАТИ:
+file1.txt
+    *ЗБОР1* бла бла бла бл
+    бла бла *ЗБОР1* бла бл
+file2.txt
+    бла бла *ЗБОР1* бла бл
+file6.txt
+    бла *ЗБОР1* бла бла бл
+
+Внесете збор за пребарување или q за крај: 
+</pre>
+                </section>
+                
+
+                <section>
+                    <h3>Задача 4: Решение</h3>
+                    <pre><code class="python">def displayFileResults(filename,positions,word):
+        """Displays the word argument in the context of its occurring"""
+
+        content=open(filename,'r').read()
+        hwl=len(word)/2 # half of the word length
+        clen=len(content)
+        print filename+"\n"
+        for pos in positions:
+                pos=int(pos)
+                start=pos-10+hwl 
+                end=pos+10-hwl
+                if start<0:
+                        start=0
+                if end > clen-1:
+                        end=clen-1
+                # The '\n' is replaced with ' ' for more compact output
+                prefix=content[start:pos].replace("\n"," ")
+                sufix=content[pos+len(word):end].replace("\n"," ")
+
+                print "\t%s*%s*%s\n" % (prefix,word.upper(),sufix)</code></pre>        
+                </section>
+                
+
+                <section>
+                    <h3>Задача 4: Решение</h3>
+                    <pre><code class="python">def search():
+        # the method from Задача 3            
+        index=readIndex()
+        while 1:
+                word=raw_input("Внесете збор за пребарување или q за крај:")
+                if word=="q": return
+                if index.has_key(word):
+                        print "РЕЗУЛТАТИ:\n"
+                        filesMap=index[word]
+                        for file in filesMap.keys():
+                                displayFileResults(file,filesMap[file],word)
+                else:
+                        print "Зборот "+word + " не е пронајде во ниту еден документ."
+
+# invoke the search method
+search()</code></pre>        
+                </section>
+            
 
                 <section style="text-align:left">
                     <h3>Прашања ?</h3>
