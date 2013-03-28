@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+
+        <title>Python - Командни процедури во UNIX</title>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+        <link rel="stylesheet" href="css/reveal.css"/>
+        <link rel="stylesheet" href="css/theme/simple.css" id="theme"/>
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/xcode.css"/>
+<!--        <link rel="stylesheet" href=" css/print/pdf.css"/>-->
+        <link rel="stylesheet" href="fonts/stobi.css"/>
+        <style type="text/css">
+            .reveal { font-family: StobiSans; } 
+            .reveal pre code { max-height: 1000px; }
+            .reveal pre { width: 98%; margin: 0px, 10px; }
+            .reveal h1, .reveal h2, .reveal h3, .reveal h4 { 
+            font-family: StobiSerif; 
+            text-align: left;
+            #            text-decoration: underline;
+            font-weight: bold;
+            border-bottom: 1px dashed  silver;
+            }
+            .reveal h1 { text-align: center; }
+            .reveal li { padding: 5px 0px; font-size: 32px; line-height: 36px;}
+            .reveal .footer { width: 70px; height: 50px; position:absolute; top: 45%; left: 50%; background-image: url('img/finki-logo-small.jpg') }
+        </style>
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write('<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print" />' );
+        </script>
+
+        <!--[if lt IE 9]>
+            <script src="lib/js/html5shiv.js">
+                /        </script>
+            <![endif]-->
+    </head>
+
+    <body>
+        <div class="reveal">
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <div class="footer"></div>
+
+                <section>
+                    <h2 style="text-align:center;border:none">
+                        Python Задачи</h2>
+                    
+                    <img src="img/front.jpg" style="width: 300px; height: 290px; border:none"/>
+                </section>
+
+
+                <section  id="zad1">
+                    <h3>Задача 1: Пребарување на датотеки</h3>
+                    <ul>        
+                        <li>Да се напише <strong>Python</strong> скрипта која за именик проследен како прв аргумент на скриптата ќе ги пронајде сите датотеки со екстензија проследена како втор аргумент на скриптата.</li>
+                        <li>Пребарувањето треба да е рекурзивно и во подимениците на дадениот именик.</li>
+                    </ul>
+                </section>
+
+
+                <section>
+                    <h3>Задача 1: Решение</h3>
+                    <pre><code class="python">#!/usr/bin/python
+
+</code></pre>        
+                </section>
+                
+
+                <section  id="zad1">
+                    <h3>Задача 2: Управување со процеси</h3>
+                    <ul>
+                        <li>Креирајте <b>Python</b> скрипта која ќе ги излиста сите активни процеси за сите корисници и ќе овозможи терминирање само на процесите на најавениот корисник. Секој од процесите треба да се излиста во следниот формат:
+                            <pre>
+1) command 1 name 
+2) command 2 name 
+...
+</pre>        
+                        </li>
+                        <li>По излистувањето на процесите, се чека корисникот да селектира кој процес сака да го терминира (редниот број на процесот). </li>
+                        <li>По внесувањето на редниот број, се терминира соодветниот процес (доколку е на најавениот корисник) и повторно му се прикажуваат активните процеси на корисникот.  </li>
+                        <li>За терминирање на скриптата корисникот треба да внесе <b>q</b> .</li>
+                        <li>Доколку селектираниот процес не е стартуван од најавениот корисник или е внесен невалиден реден број, потребно е да се испише соодветна порака. </li>                        
+                    </ul>
+
+                </section>
+
+
+                <section  >
+                    <h3>Задача 2: Анализа</h3>
+                    <ul>
+                        <li>Shell командата за управување со процеси е <b>ps</b>. </li>
+                        <li>Притоа треба да се прикажат активните процеси на сите корисници, т.е. варијантата <b>ps -аu</b>. Излезот од оваа команда е следниот:
+                            <pre style="font-size:16px">USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root       815  0.0  0.0   4188   644 tty4     Ss+  Mar17   0:00 /sbin/getty -8 38400 tty4
+root       818  0.0  0.0   4188   640 tty5     Ss+  Mar17   0:00 /sbin/getty -8 38400 tty5
+root      1243  0.0  0.0  54324  1604 tty1     Ss   Mar17   0:00 /bin/login --
+milos     4997  0.0  0.1  25972  5208 tty1     S+   Mar18   0:00 -bash
+riste    14196  0.0  0.2  30328  9560 pts/1    Ss   10:46   0:00 -bash
+riste    14436  0.0  0.0  18036  1268 pts/1    R+   11:20   0:00 ps -au</pre>
+                        </li>
+                        <li>
+                            Потребно е излезот од оваа команда да го процесираме по редици и за секоја редица да чуваме која е командата, корисникот и process id. Најсоодветна структура за оваа намена е листа од листи:
+                            <pre>[["/sbin/getty",root,815], ["/sbin/getty",root,818], ["/bin/login",root,1243], 
+["-bash",milos,4997], ["-bash",riste,14196], ["ps",riste,14436]]</pre>
+                        </li>
+                        <li>Терминирањето на процесите ќе го постигнеме со Shell командата <strong>kill pid</strong> </li>
+                    </ul>
+                </section>
+                
+
+                <section>
+                    <h3>Задача 2: Решение</h3>
+                    <pre><code class="python">  
+</code></pre>           
+                </section>
+                
+                <section id="zad1">
+                    <h3>Задача 3: Инверзен индекс</h3>
+                    <ul>
+                        <li>
+                            Да се напише <b>Python</b> скрипта која за листа од датотеки примени како аргументи од командната линија ќе креира инверзен индекс 
+                            и ќе го запише во датотеката .reverse_index.idx
+                        </li>
+                        <li>
+                            Датотеката .reverse_index.idx треба да ја има следната структура:
+                            <pre>
+збор1:file1.txt,0,41;file2.txt,17;file6.txt,78
+збор2:file1.txt,23,61,90;file2.txt,7,56
+...</pre>
+                            Каде најпрво го имаме зборот кој го индексираме, по што следуваат (разделени со :) позициите на неговото појавување во секоја од датотеките, во формат:<br/>
+                            <pre>име на датотека, позиција 1, позиција 2,...; име на друга датотека, позиција 1, позиција 2,...;...</pre>
+                            Каде позициите се индексите на првите букви на зборовите во соодветната датотека.
+                        </li>
+                        <li>
+                            Да се овозможи инкрементално градење на индексот.
+                        </li>                        
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Задача 3: Анализа</h3>
+                    <ul>
+                        <li>
+                            Бидејќи индексираме зборови, најдобро е да искористиме мапа, во која клуч ќе бидат зборовите, а вредност ќе биде листата на појавувања на зборот во секоја од датотеките. Структурата би била следната:
+                            <pre>
+{
+    "збор1": {
+        "file1.txt" : [0,41] ,
+        "file2.txt" : [17],
+        "file6.txt" : [78]
+    }, 
+    "збор2" : {
+        "file1.txt" : [23,61,90] ,
+        "file2.txt" : [7,56],
+    }
+}</pre>
+                        </li>
+                        <li>Потребна е функција која ќе ја зачува оваа структура во фајлот</li>
+                        <li>Поради инкременталноста на индексот, треба да имаме функција која ќе ја чита главната структурата од фајлот</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Задача 3: Анализа</h3>
+                    <ul>
+                        <li>
+                            Практично е да имаме функција која ќе ги индексира зборовите само во една датотека. Функцијата ќе ни враќа мапа, во која клуч ќе биде самиот збор, а вредност листа од позициите во кои се појавува зборот во таа датотека.
+                            <pre>
+за file1.txt од примерот, функцијата треба да врати:
+{
+    "збор1": [0,41],
+    "збор2": [23,61,90]
+}</pre>
+                        </li>
+                        <li>
+                            Дополнително, ќе треба да имаме уште една функција која ќе врши спојување на резултатот од претходната функција и главната структура која ни го претставува индексот
+                        </li>
+                        
+                    </ul>
+
+                </section>
+
+                <section>
+                    <h3>Задача 3: Решение</h3>
+                    <pre><code class="python">#!/usr/bin/python
+# Print the contents of the files listed on the command line.
+import sys
+if len(sys.argv) == 1:
+    sys.exit("Usage: "+sys.argv[0]+" files...");
+for fn in sys.argv[1:]:
+    fin = open(fn, 'r')
+    print "\n*** Contents of", fn, "***"
+    # Print the file, with line numbers.
+    lno = 1
+    while 1:
+        line = fin.readline()
+        if not line: break;
+        print '%3d: %-s' % (lno, line[:-1])
+        lno = lno + 1
+    fin.close()
+print
+</code></pre>
+                </section>
+
+                 <section>
+                    <h3>Задача 3: Решение</h3>
+                    <pre><code class="python">#!/usr/bin/python
+# Print the contents of the files listed on the command line.
+import sys
+if len(sys.argv) == 1:
+    sys.exit("Usage: "+sys.argv[0]+" files...");
+for fn in sys.argv[1:]:
+    fin = open(fn, 'r')
+    print "\n*** Contents of", fn, "***"
+    # Print the file, with line numbers.
+    lno = 1
+    while 1:
+        line = fin.readline()
+        if not line: break;
+        print '%3d: %-s' % (lno, line[:-1])
+        lno = lno + 1
+    fin.close()
+print
+</code></pre>
+                </section>
+
+                 <section>
+                    <h3>Задача 3: Решение</h3>
+                    <pre><code class="python">#!/usr/bin/python
+# Print the contents of the files listed on the command line.
+import sys
+if len(sys.argv) == 1:
+    sys.exit("Usage: "+sys.argv[0]+" files...");
+for fn in sys.argv[1:]:
+    fin = open(fn, 'r')
+    print "\n*** Contents of", fn, "***"
+    # Print the file, with line numbers.
+    lno = 1
+    while 1:
+        line = fin.readline()
+        if not line: break;
+        print '%3d: %-s' % (lno, line[:-1])
+        lno = lno + 1
+    fin.close()
+print
+</code></pre>
+                </section>
+
+                        
+
+                <section style="text-align:left">
+                    <h3>Прашања ?</h3>
+                </section>
+
+
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            rollingLinks: false,
+            theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+            transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+            { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+            { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+            { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+            { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+            // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+            // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+            ]
+            });
+
+
+        </script>
+
+    </body>
+</html>
