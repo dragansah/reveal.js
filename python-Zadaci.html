@@ -60,6 +60,7 @@
                     <h3>Задача 1: Пребарување на датотеки</h3>
                     <ul>        
                         <li>Да се напише <strong>Python</strong> скрипта која за именик проследен како прв аргумент на скриптата ќе ги пронајде сите датотеки со екстензија проследена како втор аргумент на скриптата.</li>
+                        <li>Пронајдените датотеки треба да се испечатат со абсолутни патеки.</li>
                         <li>Пребарувањето треба да е рекурзивно и во подимениците на дадениот именик.</li>
                     </ul>
                 </section>
@@ -68,7 +69,32 @@
                 <section>
                     <h3>Задача 1: Решение</h3>
                     <pre><code class="python">#!/usr/bin/python
+import os,sys
 
+def scanDirectory(ext,res):
+    """This function adds the absolute paths of all files that has extension 
+    'ext' and appends them to the 'res' list. It is recursive and invokes 
+    itself for all its subdirectories."""
+
+    files=os.listdir('.') # get the content of the current directory
+    for file in files:
+        if os.path.isdir(file):
+            os.chdir(file) # enter in the subdirectory 
+            scanDirectory(ext,res)
+        elif file.endswith('.'+ext):
+            res.append(os.path.abspath(file)) # append the absolute path
+    os.chdir('..') # return in the parent directory
+
+# invoke the scanning and show the results
+if len(sys.argv) < 3: sys.exit("Usage: %s search-dir extension" % (sys.argv[0]))
+
+res, path=[], os.getcwd()
+
+os.chdir(sys.argv[1]) # enter in the search directory
+scanDirectory(sys.argv[2],res) # invoke the search
+for p in res: print p # print the results
+
+os.chdir(path) # return back in the initial directory
 </code></pre>        
                 </section>
                 
@@ -100,15 +126,15 @@
                             <pre style="font-size:16px">USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
 root       815  0.0  0.0   4188   644 tty4     Ss+  Mar17   0:00 /sbin/getty -8 38400 tty4
 root       818  0.0  0.0   4188   640 tty5     Ss+  Mar17   0:00 /sbin/getty -8 38400 tty5
-root      1243  0.0  0.0  54324  1604 tty1     Ss   Mar17   0:00 /bin/login --
+root      1243  0.0  0.0  54324  1604 tty1     Ss   Mar17   0:00 /bin/login
 milos     4997  0.0  0.1  25972  5208 tty1     S+   Mar18   0:00 -bash
 riste    14196  0.0  0.2  30328  9560 pts/1    Ss   10:46   0:00 -bash
 riste    14436  0.0  0.0  18036  1268 pts/1    R+   11:20   0:00 ps -au</pre>
                         </li>
                         <li>
                             Потребно е излезот од оваа команда да го процесираме по редици и за секоја редица да чуваме која е командата, корисникот и process id. Најсоодветна структура за оваа намена е листа од листи:
-                            <pre>[["/sbin/getty",root,815], ["/sbin/getty",root,818], ["/bin/login",root,1243], 
-["-bash",milos,4997], ["-bash",riste,14196], ["ps",riste,14436]]</pre>
+                            <pre>[("/sbin/getty -8","root",815),("/sbin/getty -8","root",818),("/bin/login","root",1243),
+("-bash","milos",4997), ("-bash","riste",14196), ("ps -au","riste",14436)]</pre>
                         </li>
                         <li>Терминирањето на процесите ќе го постигнеме со Shell командата <strong>kill pid</strong> </li>
                     </ul>
@@ -117,9 +143,64 @@ riste    14436  0.0  0.0  18036  1268 pts/1    R+   11:20   0:00 ps -au</pre>
 
                 <section>
                     <h3>Задача 2: Решение</h3>
-                    <pre><code class="python">  
-</code></pre>           
+                    <pre><code class="python">#!/usr/bin/python
+import os,sys,signal
+def getActiveProcesses():
+    """Returns list of tuples containing the active processes command (with the 
+    first option or argument), the process owner and the process id"""
+    res=[]
+    ps=os.popen('ps -au')
+    ps.readline() # skip the first (header) line
+    while 1:
+        line=ps.readline().rstrip()
+        if not line: break;
+        parts=line.split()
+        if len(parts)>11:
+            cmd=parts[10]+' '+parts[11] #command and first option / argument
+            res.append((cmd, parts[0],int(parts[1])))
+        else:   
+            res.append((parts[10], parts[0],int(parts[1]))) # single word command
+    return res
+
+def killProcess(processDesc):
+    """Kills the process if it belongs to the user.Returns if the process has been killed. 'processDesc' is tuple containing the process command, owner and id."""
+    if processDesc[1]==os.getlogin():
+        os.kill(processDesc[2],signal.SIGTERM) # terminate the process
+        return True
+    else:
+        return False</code></pre>           
                 </section>
+
+
+                <section>
+                    <h3>Задача 2: Решение</h3>
+                    <pre><code class="python">def displayPrompt(processes):
+    while 1:
+        i, opt=1, -1
+        for p in processes: 
+            print "%d) %s" % (i,p[0])   
+            i=i+1     
+        opt=raw_input("Изберете процес или q за крај:")
+        if opt == 'q': break
+        try: 
+            opt=int(opt)
+            if opt <= len and opt >=1:
+                if not killProcess(processes[opt-1]):
+                    print """Не сте сопственик на процесот. 
+                    Процесот не може да се терминира."""
+                else:
+                    print "Процесот %s е терминиран." % (processes[opt-1][0])
+            else 
+                print "Невалидна селекција!"
+        except ValueError:
+            print "Невалидна селекција!"           
+        except:
+            print "Неочекувана грешка: ", sys.exc_info()
+
+#main execution
+displayPrompt(getActiveProcesses())</code></pre>        
+                </section>
+                
                 
                 <section id="zad3">
                     <h3>Задача 3: Инверзен индекс</h3>
@@ -320,12 +401,12 @@ indexArguments()</code></pre>
                     <pre>Внесете збор за пребарување или q за крај: збор1
 РЕЗУЛТАТИ:
 file1.txt
-    *ЗБОР1* бла бла бла бл
-    бла бла *ЗБОР1* бла бл
+    *ЗБОР1* бла бла
+    бла бла *ЗБОР1* бла блa
 file2.txt
-    бла бла *ЗБОР1* бла бл
+    бла бла *ЗБОР1* бла блa
 file6.txt
-    бла *ЗБОР1* бла бла бл
+    бла *ЗБОР1* бла бла
 
 Внесете збор за пребарување или q за крај: 
 </pre>
@@ -335,43 +416,43 @@ file6.txt
                 <section>
                     <h3>Задача 4: Решение</h3>
                     <pre><code class="python">def displayFileResults(filename,positions,word):
-        """Displays the word argument in the context of its occurring"""
+    """Displays the word argument in the context of its occurring"""
 
-        content=open(filename,'r').read()
-        hwl=len(word)/2 # half of the word length
-        clen=len(content)
-        print filename+"\n"
-        for pos in positions:
-                pos=int(pos)
-                start=pos-10+hwl 
-                end=pos+10-hwl
-                if start<0:
-                        start=0
-                if end > clen-1:
-                        end=clen-1
-                # The '\n' is replaced with ' ' for more compact output
-                prefix=content[start:pos].replace("\n"," ")
-                sufix=content[pos+len(word):end].replace("\n"," ")
+    content=open(filename,'r').read()
+    hwl=len(word)/2 # half of the word length
+    clen=len(content)
+    print filename+"\n"
+    for pos in positions:
+        pos=int(pos)
+        start=pos-10+hwl 
+        end=pos+10-hwl
+        if start<0:
+            start=0
+        if end > clen-1:
+            end=clen-1
+        # The '\n' is replaced with ' ' for more compact output
+        prefix=content[start:pos].replace("\n"," ")
+        sufix=content[pos+len(word):end].replace("\n"," ")
 
-                print "\t%s*%s*%s\n" % (prefix,word.upper(),sufix)</code></pre>        
+        print "\t%s*%s*%s\n" % (prefix,word.upper(),sufix)</code></pre>        
                 </section>
                 
 
                 <section>
                     <h3>Задача 4: Решение</h3>
                     <pre><code class="python">def search():
-        # the method from Задача 3            
-        index=readIndex()
-        while 1:
-                word=raw_input("Внесете збор за пребарување или q за крај:")
-                if word=="q": return
-                if index.has_key(word):
-                        print "РЕЗУЛТАТИ:\n"
-                        filesMap=index[word]
-                        for file in filesMap.keys():
-                                displayFileResults(file,filesMap[file],word)
-                else:
-                        print "Зборот "+word + " не е пронајде во ниту еден документ."
+    # the method from Задача 3            
+    index=readIndex()
+    while 1:
+        word=raw_input("Внесете збор за пребарување или q за крај:")
+        if word=="q": return
+        if index.has_key(word):
+            print "РЕЗУЛТАТИ:\n"
+            filesMap=index[word]
+            for file in filesMap.keys():
+                displayFileResults(file,filesMap[file],word)
+        else:
+            print "Зборот "+word + " не е пронајде во ниту еден документ."
 
 # invoke the search method
 search()</code></pre>        
